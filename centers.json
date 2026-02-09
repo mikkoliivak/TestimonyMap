@@ -1,0 +1,137 @@
+[
+	{
+		"name": "Greenidge",
+		"lat": 42.679497185829845,
+		"lng": -76.94756944867795,
+		"county": "Yates",
+		"testimonies": [
+			{
+				"statement": "Those nearby began to hear a low droning noise, described by one resident as the sound of a jet that never lands.",
+				"date": "9-27-2023",
+				"source": "https://earthjustice.org/article/cleaning-up-crypto",
+				"source-details": "Earthjustice"
+			},
+			{
+				"statement": "The organization Earthjustice states that the volume of the machinery in crypto mining facilities can reach 95 decibels, about the same as a moving subway train.",
+				"date": "5-3-2025",
+				"source": "https://ithacaweek-ic.com/17097/news/uncertainty-plagues-greenidge-crypto-mine/",
+				"source-details": "Ithaca Week"
+			},
+			{
+				"statement": "Residents living near mining facilities have reported problems like blood pressure spikes, tinnitus, migraines, permanent hearing loss; and even problems with pets, like hair loss and the development of chronic anxiety in dogs.",
+				"date": "5-3-2025",
+				"source": "https://ithacaweek-ic.com/17097/news/uncertainty-plagues-greenidge-crypto-mine/",
+				"source-details": "Ithaca Week"
+			},
+			{
+				"statement": "In the small village of Dresden, NY, a subdued but constant industrial roar can be heard from the neighborhood streets.",
+				"date": "5-3-2025",
+				"source": "https://ithacaweek-ic.com/17097/news/uncertainty-plagues-greenidge-crypto-mine/",
+				"source-details": "Ithaca Week"
+			},
+			{
+				"statement": "Residents in the Finger Lakes report worsening air quality and constant industrial noise. Tourists who once flocked for peace, wine, and pristine waters now see cooling towers and hear the hum of Bitcoin rigs.",
+				"date": "8-17-2025",
+				"source": "https://ecoservantsproject.org/crypto-betrays-creation-greenidges-fossil-fueled-bitcoin-mine-must-be-shut-down/",
+				"source-details": "EcoServants Project"
+			},
+			{
+				"statement": "Communities across the country are dealing with the same problems — noise, pollution, water usage — and it's time for a national conversation about the true cost of crypto mining.",
+				"date": "1-27-2025",
+				"source": "https://www.ithaca.com/news/regional_news/greenidge-crypto-mining-facility-allowed-to-operate-despite-undermining-state-climate-goals/article_d8fed5d0-d9e8-11ef-a025-bbc6c8c2d875.html",
+				"source-details": "Ithaca.com"
+			}
+		]
+	},
+	{
+		"name": "Lake Mariner",
+		"lat": 43.347683,
+		"lng": -78.555656,
+		"county": "Niagara",
+		"testimonies": [
+			{
+				"statement": "They told us the noise wouldn't be a problem. It's a problem. The constant hum keeps us up at night. And now they're expanding again.",
+				"date": "10-9-2025",
+				"source": "https://www.fingerlakes1.com/2025/10/09/lansing-residents-call-for-answers-as-terawulf-data-center-plans-unravel/",
+				"source-details": "FingerLakes1"
+			},
+			{
+				"statement": "The sound is different all the time. Last Tuesday morning it was extremely loud, especially at 5 a.m. in the morning … Sometimes we don't hear it at all and sometimes it's excessively loud.",
+				"date": "11-14-2024",
+				"source": "https://tech.yahoo.com/ai/articles/ai-data-center-plan-approved-045900997.html",
+				"source-details": "Yahoo Tech"
+			},
+			{
+				"statement": "I've lived in my house for 35 years. So I was there when the power plant was running at full bore and it was at night, not as bothersome as it is now. I think part of the problem is it's steady now. It's not peak and valley noise.",
+				"date": "10-9-2024",
+				"source": "https://www.yahoo.com/tech/somerset-data-center-pitches-buildings-035900867.html",
+				"source-details": "Yahoo Tech"
+			},
+			{
+				"statement": "The noise is not abating and more people from further away are hearing it and are being disturbed by the noise.",
+				"date": "8-21-2024",
+				"source": "https://www.yahoo.com/news/somerset-residents-sound-off-data-035900559.html",
+				"source-details": "Yahoo News"
+			},
+			{
+				"statement": "It's hit and miss. (Some of) the people who live near it say they don't hear anything. One person down the road from there says they hear it all the time. The other one, a mile or so south of there, says they they hear it all the time at their house, but then their neighbors don't hear it.",
+				"date": "1-11-2024",
+				"source": "https://finance.yahoo.com/news/third-building-completed-somerset-data-045900016.html",
+				"source-details": "Yahoo Finance"
+			},
+			{
+				"statement": "Residents say the fans that cool some of the on-site computers produce a constant 95-decibel hum — about the same as standing next to a running lawnmower or motorcycle.",
+				"date": "9-11-2025",
+				"source": "https://ithacavoice.org/2025/09/environmentalists-sound-alarm-as-plan-to-convert-cayuga-power-plant-to-data-center-advances/",
+				"source-details": "The Ithaca Voice"
+			}
+		]
+	},
+	{
+		"name": "H5 Datacenters",
+		"lat": 43.167553,
+		"lng": -78.751731,
+		"county": "Niagara",
+		"testimonies": [
+			
+		]
+	},
+	{
+		"name": "Blockfusion (Niagara Falls)",
+		"lat": 43.092583,
+		"lng": -79.035583,
+		"county": "Niagara",
+		"testimonies": [
+			{
+				"statement": "I get four hours of sleep, maybe, because of that constant noise. I can hear the noise even through the storm windows.",
+				"date": "11-2-2022",
+				"source": "https://www.digitaljournal.com/business/in-niagara-falls-bitcoin-mining-brings-a-new-roar-to-town/article",
+				"source-details": "Digital Journal"
+			},
+			{
+				"statement": "It sounds like a 747 jet. It's the loudest in the morning, at night, and if there's high humidity and a breeze.",
+				"date": "11-2-2022",
+				"source": "https://www.digitaljournal.com/business/in-niagara-falls-bitcoin-mining-brings-a-new-roar-to-town/article",
+				"source-details": "Digital Journal"
+			},
+			{
+				"statement": "It's very mentally daunting. It's like having a toothache for 24 hours a day every day.",
+				"date": "11-2-2022",
+				"source": "https://www.digitaljournal.com/business/in-niagara-falls-bitcoin-mining-brings-a-new-roar-to-town/article",
+				"source-details": "Digital Journal"
+			},
+			{
+				"statement": "I'm going to be protesting till the hum is gone, basically, till I get the roar of the falls back because that's what I used to hear.",
+				"date": "11-28-2023",
+				"source": "https://protos.com/bitcoin-mining-in-niagara-falls-goes-brrr-in-all-the-wrong-ways/",
+				"source-details": "Protos"
+			},
+			{
+				"statement": "The noise pollution of this industry is like nothing else that has been there.",
+				"date": "11-7-2022",
+				"source": "https://www.euronews.com/green/2022/11/07/bitcoin-mining-is-drowning-out-the-sound-of-niagara-falls-heres-how",
+				"source-details": "Euronews"
+			}
+		]
+	}
+]
