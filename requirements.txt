@@ -1,0 +1,6 @@
+# Mapping
+folium>=0.15.0
+
+# Jupyter (to run the notebook)
+jupyter>=1.0.0
+notebook>=7.0.0
