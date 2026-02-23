@@ -1,6 +1,11 @@
-# Mapping
+# Map (datacenters.ipynb)
 folium>=0.15.0
 
-# Jupyter (to run the notebook)
+# Jupyter
 jupyter>=1.0.0
 notebook>=7.0.0
+
+# Scraper (yahoo_news_scraper.py)
+beautifulsoup4>=4.12.0
+pandas>=2.0.0
+selenium>=4.15.0

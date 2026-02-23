@@ -1,50 +1,54 @@
 # Datacenter Testimonies Map
 
-A research project mapping **resident testimonies** about crypto mining and data center facilities in New York State. The map shows facility locations (e.g., Greenidge, Lake Mariner, H5 Datacenters, Blockfusion) and links to reported impacts such as noise, air quality, and health effects, with sources and dates.
+A research project mapping **resident testimonies** about crypto mining and data center facilities in New York State. The map shows facility locations (Greenidge, Lake Mariner, H5 Datacenters, Blockfusion) and links to reported impacts such as noise, air quality, and health effects.
 
 ## Project structure
 
 | File | Description |
 |------|-------------|
-| `datacenters.ipynb` | Jupyter notebook that builds the interactive map from the datacenter dataset |
-| `datacenter_testimonies_map.html` | Output map: open in a browser to explore locations and testimonies |
-| `centers.json` | Datacenter data (name, coordinates, county, testimonies with statement, date, source) |
+| `centers.json` | Datacenter data: name, coordinates, county, testimonies (statement, date, source) |
+| `datacenters.ipynb` | Jupyter notebook: loads `centers.json` and builds the interactive map |
+| `yahoo_news_scraper.py` | Scraper: searches Yahoo News by keywords, extracts testimonies, merges into `centers.json` |
 
 ## Setup
 
-1. **Clone the repo** (if you haven’t already):
+1. **Clone the repo:**
    ```bash
-   git clone <repo-url>
-   cd "CS4999 Research SP26"
+   git clone https://github.com/mikkoliivak/CS4999-Research-SP26
+   cd CS4999-Research-SP26
    ```
 
-2. **Create and use a virtual environment** (recommended):
+2. **Create and activate a virtual environment:**
    ```bash
    python3 -m venv venv
-   source venv/bin/activate   # On Windows: venv\Scripts\activate
+   source venv/bin/activate   # Windows: venv\Scripts\activate
    ```
 
-3. **Install dependencies**:
+3. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-## Running the notebook
+## Running the map
 
-1. Start Jupyter:
-   ```bash
-   jupyter notebook
-   ```
-2. Open `datacenters.ipynb` and run all cells (Cell → Run All).
-3. The last cell saves the map as `datacenter_testimonies_map.html`.
+1. Start Jupyter: `jupyter notebook`
+2. Open `datacenters.ipynb` and run all cells.
+3. The notebook saves the map as `datacenter_testimonies_map.html` (open in a browser).
 
-To view the map without re-running the notebook, open `datacenter_testimonies_map.html` in a web browser.
+## Scraping new testimonies
+
+The scraper uses **Selenium** (Chrome in headless mode) and **BeautifulSoup** to search Yahoo News and extract datacenter-related testimonies. New testimonies are merged into `centers.json` automatically.
+
+**Requirements:** Chrome browser installed.
+
+```bash
+python yahoo_news_scraper.py
+```
+
+Edit `KEYWORDS` at the top of the script to change search terms. Output is merged into `centers.json`; re-run the notebook to refresh the map.
 
 ## Requirements
 
 - Python 3.8+
-- See `requirements.txt` for Python packages (`folium`, `jupyter`, `notebook`).
-
-## Data
-
-Testimonies are collected from cited news and advocacy sources (e.g., Earthjustice, Ithaca Week, Digital Journal). Each testimony includes the statement, date, and source link. The map uses marker color to reflect the number of testimonies per site (gray: none, orange: 1–4, red: 5+).
+- Chrome (for the scraper)
+- See `requirements.txt` for Python packages.

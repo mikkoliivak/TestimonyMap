@@ -1,137 +1,405 @@
 [
-	{
-		"name": "Greenidge",
-		"lat": 42.679497185829845,
-		"lng": -76.94756944867795,
-		"county": "Yates",
-		"testimonies": [
-			{
-				"statement": "Those nearby began to hear a low droning noise, described by one resident as the sound of a jet that never lands.",
-				"date": "9-27-2023",
-				"source": "https://earthjustice.org/article/cleaning-up-crypto",
-				"source-details": "Earthjustice"
-			},
-			{
-				"statement": "The organization Earthjustice states that the volume of the machinery in crypto mining facilities can reach 95 decibels, about the same as a moving subway train.",
-				"date": "5-3-2025",
-				"source": "https://ithacaweek-ic.com/17097/news/uncertainty-plagues-greenidge-crypto-mine/",
-				"source-details": "Ithaca Week"
-			},
-			{
-				"statement": "Residents living near mining facilities have reported problems like blood pressure spikes, tinnitus, migraines, permanent hearing loss; and even problems with pets, like hair loss and the development of chronic anxiety in dogs.",
-				"date": "5-3-2025",
-				"source": "https://ithacaweek-ic.com/17097/news/uncertainty-plagues-greenidge-crypto-mine/",
-				"source-details": "Ithaca Week"
-			},
-			{
-				"statement": "In the small village of Dresden, NY, a subdued but constant industrial roar can be heard from the neighborhood streets.",
-				"date": "5-3-2025",
-				"source": "https://ithacaweek-ic.com/17097/news/uncertainty-plagues-greenidge-crypto-mine/",
-				"source-details": "Ithaca Week"
-			},
-			{
-				"statement": "Residents in the Finger Lakes report worsening air quality and constant industrial noise. Tourists who once flocked for peace, wine, and pristine waters now see cooling towers and hear the hum of Bitcoin rigs.",
-				"date": "8-17-2025",
-				"source": "https://ecoservantsproject.org/crypto-betrays-creation-greenidges-fossil-fueled-bitcoin-mine-must-be-shut-down/",
-				"source-details": "EcoServants Project"
-			},
-			{
-				"statement": "Communities across the country are dealing with the same problems — noise, pollution, water usage — and it's time for a national conversation about the true cost of crypto mining.",
-				"date": "1-27-2025",
-				"source": "https://www.ithaca.com/news/regional_news/greenidge-crypto-mining-facility-allowed-to-operate-despite-undermining-state-climate-goals/article_d8fed5d0-d9e8-11ef-a025-bbc6c8c2d875.html",
-				"source-details": "Ithaca.com"
-			}
-		]
-	},
-	{
-		"name": "Lake Mariner",
-		"lat": 43.347683,
-		"lng": -78.555656,
-		"county": "Niagara",
-		"testimonies": [
-			{
-				"statement": "They told us the noise wouldn't be a problem. It's a problem. The constant hum keeps us up at night. And now they're expanding again.",
-				"date": "10-9-2025",
-				"source": "https://www.fingerlakes1.com/2025/10/09/lansing-residents-call-for-answers-as-terawulf-data-center-plans-unravel/",
-				"source-details": "FingerLakes1"
-			},
-			{
-				"statement": "The sound is different all the time. Last Tuesday morning it was extremely loud, especially at 5 a.m. in the morning … Sometimes we don't hear it at all and sometimes it's excessively loud.",
-				"date": "11-14-2024",
-				"source": "https://tech.yahoo.com/ai/articles/ai-data-center-plan-approved-045900997.html",
-				"source-details": "Yahoo Tech"
-			},
-			{
-				"statement": "I've lived in my house for 35 years. So I was there when the power plant was running at full bore and it was at night, not as bothersome as it is now. I think part of the problem is it's steady now. It's not peak and valley noise.",
-				"date": "10-9-2024",
-				"source": "https://www.yahoo.com/tech/somerset-data-center-pitches-buildings-035900867.html",
-				"source-details": "Yahoo Tech"
-			},
-			{
-				"statement": "The noise is not abating and more people from further away are hearing it and are being disturbed by the noise.",
-				"date": "8-21-2024",
-				"source": "https://www.yahoo.com/news/somerset-residents-sound-off-data-035900559.html",
-				"source-details": "Yahoo News"
-			},
-			{
-				"statement": "It's hit and miss. (Some of) the people who live near it say they don't hear anything. One person down the road from there says they hear it all the time. The other one, a mile or so south of there, says they they hear it all the time at their house, but then their neighbors don't hear it.",
-				"date": "1-11-2024",
-				"source": "https://finance.yahoo.com/news/third-building-completed-somerset-data-045900016.html",
-				"source-details": "Yahoo Finance"
-			},
-			{
-				"statement": "Residents say the fans that cool some of the on-site computers produce a constant 95-decibel hum — about the same as standing next to a running lawnmower or motorcycle.",
-				"date": "9-11-2025",
-				"source": "https://ithacavoice.org/2025/09/environmentalists-sound-alarm-as-plan-to-convert-cayuga-power-plant-to-data-center-advances/",
-				"source-details": "The Ithaca Voice"
-			}
-		]
-	},
-	{
-		"name": "H5 Datacenters",
-		"lat": 43.167553,
-		"lng": -78.751731,
-		"county": "Niagara",
-		"testimonies": [
-			
-		]
-	},
-	{
-		"name": "Blockfusion (Niagara Falls)",
-		"lat": 43.092583,
-		"lng": -79.035583,
-		"county": "Niagara",
-		"testimonies": [
-			{
-				"statement": "I get four hours of sleep, maybe, because of that constant noise. I can hear the noise even through the storm windows.",
-				"date": "11-2-2022",
-				"source": "https://www.digitaljournal.com/business/in-niagara-falls-bitcoin-mining-brings-a-new-roar-to-town/article",
-				"source-details": "Digital Journal"
-			},
-			{
-				"statement": "It sounds like a 747 jet. It's the loudest in the morning, at night, and if there's high humidity and a breeze.",
-				"date": "11-2-2022",
-				"source": "https://www.digitaljournal.com/business/in-niagara-falls-bitcoin-mining-brings-a-new-roar-to-town/article",
-				"source-details": "Digital Journal"
-			},
-			{
-				"statement": "It's very mentally daunting. It's like having a toothache for 24 hours a day every day.",
-				"date": "11-2-2022",
-				"source": "https://www.digitaljournal.com/business/in-niagara-falls-bitcoin-mining-brings-a-new-roar-to-town/article",
-				"source-details": "Digital Journal"
-			},
-			{
-				"statement": "I'm going to be protesting till the hum is gone, basically, till I get the roar of the falls back because that's what I used to hear.",
-				"date": "11-28-2023",
-				"source": "https://protos.com/bitcoin-mining-in-niagara-falls-goes-brrr-in-all-the-wrong-ways/",
-				"source-details": "Protos"
-			},
-			{
-				"statement": "The noise pollution of this industry is like nothing else that has been there.",
-				"date": "11-7-2022",
-				"source": "https://www.euronews.com/green/2022/11/07/bitcoin-mining-is-drowning-out-the-sound-of-niagara-falls-heres-how",
-				"source-details": "Euronews"
-			}
-		]
-	}
+  {
+    "name": "Greenidge",
+    "lat": 42.679497185829845,
+    "lng": -76.94756944867795,
+    "county": "Yates",
+    "testimonies": [
+      {
+        "statement": "Those nearby began to hear a low droning noise, described by one resident as the sound of a jet that never lands.",
+        "date": "9-27-2023",
+        "source": "https://earthjustice.org/article/cleaning-up-crypto",
+        "source-details": "Earthjustice"
+      },
+      {
+        "statement": "The organization Earthjustice states that the volume of the machinery in crypto mining facilities can reach 95 decibels, about the same as a moving subway train.",
+        "date": "5-3-2025",
+        "source": "https://ithacaweek-ic.com/17097/news/uncertainty-plagues-greenidge-crypto-mine/",
+        "source-details": "Ithaca Week"
+      },
+      {
+        "statement": "Residents living near mining facilities have reported problems like blood pressure spikes, tinnitus, migraines, permanent hearing loss; and even problems with pets, like hair loss and the development of chronic anxiety in dogs.",
+        "date": "5-3-2025",
+        "source": "https://ithacaweek-ic.com/17097/news/uncertainty-plagues-greenidge-crypto-mine/",
+        "source-details": "Ithaca Week"
+      },
+      {
+        "statement": "In the small village of Dresden, NY, a subdued but constant industrial roar can be heard from the neighborhood streets.",
+        "date": "5-3-2025",
+        "source": "https://ithacaweek-ic.com/17097/news/uncertainty-plagues-greenidge-crypto-mine/",
+        "source-details": "Ithaca Week"
+      },
+      {
+        "statement": "Residents in the Finger Lakes report worsening air quality and constant industrial noise. Tourists who once flocked for peace, wine, and pristine waters now see cooling towers and hear the hum of Bitcoin rigs.",
+        "date": "8-17-2025",
+        "source": "https://ecoservantsproject.org/crypto-betrays-creation-greenidges-fossil-fueled-bitcoin-mine-must-be-shut-down/",
+        "source-details": "EcoServants Project"
+      },
+      {
+        "statement": "Communities across the country are dealing with the same problems — noise, pollution, water usage — and it's time for a national conversation about the true cost of crypto mining.",
+        "date": "1-27-2025",
+        "source": "https://www.ithaca.com/news/regional_news/greenidge-crypto-mining-facility-allowed-to-operate-despite-undermining-state-climate-goals/article_d8fed5d0-d9e8-11ef-a025-bbc6c8c2d875.html",
+        "source-details": "Ithaca.com"
+      }
+    ]
+  },
+  {
+    "name": "Lake Mariner",
+    "lat": 43.347683,
+    "lng": -78.555656,
+    "county": "Niagara",
+    "testimonies": [
+      {
+        "statement": "They told us the noise wouldn't be a problem. It's a problem. The constant hum keeps us up at night. And now they're expanding again.",
+        "date": "10-9-2025",
+        "source": "https://www.fingerlakes1.com/2025/10/09/lansing-residents-call-for-answers-as-terawulf-data-center-plans-unravel/",
+        "source-details": "FingerLakes1"
+      },
+      {
+        "statement": "The sound is different all the time. Last Tuesday morning it was extremely loud, especially at 5 a.m. in the morning … Sometimes we don't hear it at all and sometimes it's excessively loud.",
+        "date": "11-14-2024",
+        "source": "https://tech.yahoo.com/ai/articles/ai-data-center-plan-approved-045900997.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "I've lived in my house for 35 years. So I was there when the power plant was running at full bore and it was at night, not as bothersome as it is now. I think part of the problem is it's steady now. It's not peak and valley noise.",
+        "date": "10-9-2024",
+        "source": "https://www.yahoo.com/tech/somerset-data-center-pitches-buildings-035900867.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "The noise is not abating and more people from further away are hearing it and are being disturbed by the noise.",
+        "date": "8-21-2024",
+        "source": "https://www.yahoo.com/news/somerset-residents-sound-off-data-035900559.html",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "It's hit and miss. (Some of) the people who live near it say they don't hear anything. One person down the road from there says they hear it all the time. The other one, a mile or so south of there, says they they hear it all the time at their house, but then their neighbors don't hear it.",
+        "date": "1-11-2024",
+        "source": "https://finance.yahoo.com/news/third-building-completed-somerset-data-045900016.html",
+        "source-details": "Yahoo Finance"
+      },
+      {
+        "statement": "Residents say the fans that cool some of the on-site computers produce a constant 95-decibel hum — about the same as standing next to a running lawnmower or motorcycle.",
+        "date": "9-11-2025",
+        "source": "https://ithacavoice.org/2025/09/environmentalists-sound-alarm-as-plan-to-convert-cayuga-power-plant-to-data-center-advances/",
+        "source-details": "The Ithaca Voice"
+      },
+      {
+        "statement": "Marabella said each battery is self-contained and shuts down if it reaches 480 degrees. A noise study submitted to the town by consulting company Acentech stated that sounds coming from Lake Mariner were below Somerset’s 50 dB nighttime sound limit at nearby residences, with measurements taking place in July 2024. Noise concerns from residents have been a common complaint since Terawulf began gathering approvals in 2021.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/articles/lake-mariner-data-center-plans-211800630.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "A noise study submitted to the town by consulting company Acentech stated that sounds coming from Lake Mariner were below Somerset’s 50 dB nighttime sound limit at nearby residences, with measurements taking place in July 2024. Noise concerns from residents have been a common complaint since Terawulf began gathering approvals in 2021. Advertisement Advertisement This past January, a 613-foot smokestack from the former coal-fired plant was demolished to make room for more data center buildings.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/articles/lake-mariner-data-center-plans-211800630.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "“There’s still some other areas of development,” Marabella said, adding there could be more expansion in the future. Advertisement Advertisement Advertisement Several noise studies were done on the property boundary, with Marabella saying the results showed they are below the 50 dBA listed in the town’s noise ordinance. The company is looking to put in electrical switch gears and dry cooler yards to cool the data servers and invest $800,000 in low-noise motors and blades for the data center so there would be no potential for additional noise impact.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/ai/articles/somerset-ai-data-center-proposal-211700300.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "Advertisement Advertisement Advertisement Several noise studies were done on the property boundary, with Marabella saying the results showed they are below the 50 dBA listed in the town’s noise ordinance. The company is looking to put in electrical switch gears and dry cooler yards to cool the data servers and invest $800,000 in low-noise motors and blades for the data center so there would be no potential for additional noise impact. The company currently has approval for a 250-megawatt power allocation, 90% hydropower from the New York Power Authority and the rest from NYSEG.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/ai/articles/somerset-ai-data-center-proposal-211700300.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "Advertisement Advertisement Advertisement Trending : The best streaming deals of the week The best new art TVs: Samsung Frame and more The best soundbar to buy Best open-ear headphones for 2025 The best streaming services: Tested and reviewed Lockport Union-Sun & Journal, N.Y. AI data center has site plan approved pending sewer and noise compliance Benjamin Joe , Lockport Union-Sun & Journal, N.Y. Wed, November 13, 2024 at 11:59 PM EST Add Yahoo Tech on Google SOMERSET — The Lake Mariner Data Center is a step closer to housing an artificial intelligence facility.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/ai/articles/ai-data-center-plan-approved-045900997.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "is the parent company of Wulf Compute LLC, which will operate the data center. The site plan for the addition, a five-building facility of which four buildings will be constructed, was approved by the town’s planning board last week but the approval is pending upon the company’s compliance with sewer and noise issues. Advertisement Advertisement Advertisement Jerry Goodenough, project manager of TeraWulf Inc., told the planning board that the company will be installing a septic tank in order to bypass issues in its line to the town’s sewer.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/ai/articles/ai-data-center-plan-approved-045900997.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "“The sound is different all the time. Last Tuesday morning it was extremely loud, especially at 5 a.m. in the morning … Sometimes we don’t hear it at all and sometimes it’s excessively loud,” Atwater said, adding that she feels compliance to the noise ordinance in Somerset must be part of the conditional approval.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/ai/articles/ai-data-center-plan-approved-045900997.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "Last Tuesday morning it was extremely loud, especially at 5 a.m. in the morning … Sometimes we don’t hear it at all and sometimes it’s excessively loud,” Atwater said, adding that she feels compliance to the noise ordinance in Somerset must be part of the conditional approval. Advertisement Advertisement Advertisement “I do feel it’s necessary.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/ai/articles/ai-data-center-plan-approved-045900997.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "Advertisement Advertisement Advertisement Currently, the company has approval for a 250-megawatt power allocation, 90% hydropower from the New York Power Authority and the rest from NYSEG, with the potential to increase to 500 megawatts, pending approval from the state. When TeraWulf sought site approval from the town planning board in 2021, the proposal drew concerns from residents including the prospect of noise from fans used to cool the buildings. The company has performed two separate noise studies, but complaints are still being fielded from some town residents.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/ai/articles/somerset-data-center-pitches-buildings-035900867.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "When TeraWulf sought site approval from the town planning board in 2021, the proposal drew concerns from residents including the prospect of noise from fans used to cool the buildings. The company has performed two separate noise studies, but complaints are still being fielded from some town residents. The subject was a common topic of questioning amongst several of the board members and company personnel at Thursday night’s meeting.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/ai/articles/somerset-data-center-pitches-buildings-035900867.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "We did this specifically so we could figure out what to fix if there’s something to fix,” project manager Jerry Goodenough said. According to Goodenough, the company is considering the installation of different blades on fans in an effort to reduce noise and noted the town’s building inspector visits the site once every month to monitor construction. Representatives from the company will also pitch their plans to the Niagara County Planning Board on Oct.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/ai/articles/somerset-data-center-pitches-buildings-035900867.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "Similar to the third building that was constructed last year, crews have installed static venting to cool Building 4, as opposed to fans that were installed in the first two buildings. When TeraWulf sought site approval from the town planning board in 2021, the proposal drew concerns from residents including the prospect of noise from fans used to cool the buildings. Advertisement Advertisement “We did talk to them about the noise issue that they are having with the existing ones, and they said they’re working on it with their studies and everything else,” Jansen said.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-planning-board-oks-preliminary-035900865.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "When TeraWulf sought site approval from the town planning board in 2021, the proposal drew concerns from residents including the prospect of noise from fans used to cool the buildings. Advertisement Advertisement “We did talk to them about the noise issue that they are having with the existing ones, and they said they’re working on it with their studies and everything else,” Jansen said. Town supervisor Jeff Dewart previously said the town has considered performing a noise study, as some of the previous studies done by TeraWulf have been inconclusive and complaints are still being fielded from some neighboring residents.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-planning-board-oks-preliminary-035900865.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Advertisement Advertisement “We did talk to them about the noise issue that they are having with the existing ones, and they said they’re working on it with their studies and everything else,” Jansen said. Town supervisor Jeff Dewart previously said the town has considered performing a noise study, as some of the previous studies done by TeraWulf have been inconclusive and complaints are still being fielded from some neighboring residents. In response, last month the town board approved the issue of a Request For Proposals to conduct a noise study at homes near the site.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-planning-board-oks-preliminary-035900865.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Town supervisor Jeff Dewart previously said the town has considered performing a noise study, as some of the previous studies done by TeraWulf have been inconclusive and complaints are still being fielded from some neighboring residents. In response, last month the town board approved the issue of a Request For Proposals to conduct a noise study at homes near the site. View comments Terms and Privacy Policy Privacy Dashboard About Our Ads Terms and Privacy Policy Privacy Dashboard About Our Ads Advertisement Advertisement Explore related articles Advertisement Yahoo!",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-planning-board-oks-preliminary-035900865.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Advertisement Advertisement Advertisement Similar to the third building that was constructed last year, crews have installed static venting to cool Building 4, as opposed to fans that were installed in the first two buildings. When TeraWulf sought site approval from the Somerset town planning board in 2021, the proposal drew concerns from residents including the prospect of noise from fans used to cool the buildings. The town has considered performing a noise study, as some of the previous studies done by TeraWulf have been inconclusive, and complaints are still being fielded from some neighboring residents, town supervisor Jeff Dewart said.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/general/articles/somerset-data-center-development-continues-035900864.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "When TeraWulf sought site approval from the Somerset town planning board in 2021, the proposal drew concerns from residents including the prospect of noise from fans used to cool the buildings. The town has considered performing a noise study, as some of the previous studies done by TeraWulf have been inconclusive, and complaints are still being fielded from some neighboring residents, town supervisor Jeff Dewart said. The town board approved the issue of a Request For Proposals to conduct a noise study at homes near the site last week.",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/general/articles/somerset-data-center-development-continues-035900864.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "The town has considered performing a noise study, as some of the previous studies done by TeraWulf have been inconclusive, and complaints are still being fielded from some neighboring residents, town supervisor Jeff Dewart said. The town board approved the issue of a Request For Proposals to conduct a noise study at homes near the site last week. Advertisement Advertisement Advertisement “I talked to Jerry about it and he said they know there’s some issues about it and I guess they had trouble with a couple of them and he had gotten no data..",
+        "date": "Unknown",
+        "source": "https://tech.yahoo.com/general/articles/somerset-data-center-development-continues-035900864.html",
+        "source-details": "Yahoo Tech"
+      },
+      {
+        "statement": "Somerset residents sound off on data center noise issues Search query Search the web Skip to main News Finance Sports More Mail Sign in Search the web Advertisement Advertisement Return to Homepage Top Stories: East Coast blizzard Play Crushable by Candy Crush Trump's approval rating Mexican drug cartel leader killed Greenland hospital boat Olympics Closing Ceremony Mar-a-Lago shooting TSA PreCheck reversal Trump hikes tariffs Genetic genealogy 'Half-daylight saving time'? Lockport Union-Sun & Journal, N.Y.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-residents-sound-off-data-035900559.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Lockport Union-Sun & Journal, N.Y. Somerset residents sound off on data center noise issues Thomas Tedesco , Lockport Union-Sun & Journal, N.Y. Tue, August 20, 2024 at 11:59 PM EDT 3 min read Add Yahoo as a preferred source to see more of our stories on Google.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-residents-sound-off-data-035900559.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Tue, August 20, 2024 at 11:59 PM EDT 3 min read Add Yahoo as a preferred source to see more of our stories on Google. Add Yahoo on Google BARKER — Residents in Somerset are once again raising concerns about noise at the Lake Mariner Data Center. Those concerns have been heightened with the Somerset town and planning boards approving a proposed site plan from the company that outlines the construction of four additional buildings to house additional bitcoin mining facilities.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-residents-sound-off-data-035900559.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Those concerns have been heightened with the Somerset town and planning boards approving a proposed site plan from the company that outlines the construction of four additional buildings to house additional bitcoin mining facilities. Resident Betty Wolanyk claims that the noise has gotten louder since the last two buildings were erected over the past year. Wolanyk was one of about half a dozen residents to speak out on the issue during last week’s town board meeting.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-residents-sound-off-data-035900559.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "According to town Supervisor Jeff Dewart, crews also installed devices to somewhat mute the roughly 95 decibels that the fans generate. Advertisement Advertisement Dewart said that there isn’t much action officials can take until a proper noise study from the town is completed. Previously studies conducted by Terawulf were deemed inconclusive.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-residents-sound-off-data-035900559.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Previously studies conducted by Terawulf were deemed inconclusive. The board approved the issue of a Request For Proposals to conduct a noise study at homes near the site in June. “We do have an RFP that’s going out so we can get our own study done on that.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/somerset-residents-sound-off-data-035900559.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      }
+    ]
+  },
+  {
+    "name": "H5 Datacenters",
+    "lat": 43.167553,
+    "lng": -78.751731,
+    "county": "Niagara",
+    "testimonies": []
+  },
+  {
+    "name": "Blockfusion (Niagara Falls)",
+    "lat": 43.092583,
+    "lng": -79.035583,
+    "county": "Niagara",
+    "testimonies": [
+      {
+        "statement": "I get four hours of sleep, maybe, because of that constant noise. I can hear the noise even through the storm windows.",
+        "date": "11-2-2022",
+        "source": "https://www.digitaljournal.com/business/in-niagara-falls-bitcoin-mining-brings-a-new-roar-to-town/article",
+        "source-details": "Digital Journal"
+      },
+      {
+        "statement": "It sounds like a 747 jet. It's the loudest in the morning, at night, and if there's high humidity and a breeze.",
+        "date": "11-2-2022",
+        "source": "https://www.digitaljournal.com/business/in-niagara-falls-bitcoin-mining-brings-a-new-roar-to-town/article",
+        "source-details": "Digital Journal"
+      },
+      {
+        "statement": "It's very mentally daunting. It's like having a toothache for 24 hours a day every day.",
+        "date": "11-2-2022",
+        "source": "https://www.digitaljournal.com/business/in-niagara-falls-bitcoin-mining-brings-a-new-roar-to-town/article",
+        "source-details": "Digital Journal"
+      },
+      {
+        "statement": "I'm going to be protesting till the hum is gone, basically, till I get the roar of the falls back because that's what I used to hear.",
+        "date": "11-28-2023",
+        "source": "https://protos.com/bitcoin-mining-in-niagara-falls-goes-brrr-in-all-the-wrong-ways/",
+        "source-details": "Protos"
+      },
+      {
+        "statement": "The noise pollution of this industry is like nothing else that has been there.",
+        "date": "11-7-2022",
+        "source": "https://www.euronews.com/green/2022/11/07/bitcoin-mining-is-drowning-out-the-sound-of-niagara-falls-heres-how",
+        "source-details": "Euronews"
+      },
+      {
+        "statement": "Blockfusion spent $25 million to convert a decommissioned coal power plant on Frontier Avenue into a cryptocurrency mining operation. The site became a source of concern for some neighbors who complained about the noise created during the process of Bitcoin mining. City officials later adopted a series of zoning code amendments that imposed strict new regulations on the operation of so-called “high-energy use industries.” Blockfusion’s Frontier Avenue operation shut down in November 2022 after the city notified the company that it was in violation of high-energy use industry amendments, prompting the company to immediately file an application for an operating permit that included changes to the operation in an effort to comply with the new regulations.",
+        "date": "Unknown",
+        "source": "https://finance.yahoo.com/news/niagara-falls-crypto-mine-exploring-035900410.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo Finance"
+      },
+      {
+        "statement": "\"It's to protect the town from the issues that the cities of Niagara Falls and North Tonawanda have been having with cryptocurrency (mining) operators,\" town Supervisor Sylvia Virtuoso said. Advertisement Advertisement The supervisor said the town was looking to be \"proactive in protecting town residents\" from common complaints about high-energy use industries such as air and noise pollution. Deputy Town Supervisor Marc Carpenter said, \"We watched the struggles of Niagara Falls and North Tonawanda (after high-energy use industries) began operating there.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/town-niagara-imposes-high-energy-111800317.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "\"Things here are moving quickly and we need to decide if (high-energy use industries) are a good fit for the town and our residents. Not every business is a good fit.\" After licensing its first crypto-mining facility in 2023, Niagara Falls remains embroiled in an ongoing dispute with a second company over noise concerns. That facility continues to be shut down.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/town-niagara-imposes-high-energy-111800317.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "19—TOWN OF NIAGARA — Members of the town board, without debate, moved unanimously Tuesday night to approve a one-year moratorium on \"cryptocurrency mining, data processing centers and battery energy storage systems in the town.\" A public hearing on the proposed moratorium, that proceeded the town board meeting failed to attract any speakers either for or against the proposal. \"It's to protect the town from the issues that the cities of Niagara Falls and North Tonawanda have been having with cryptocurrency (mining) operators,\" town Supervisor Sylvia Virtuoso said. Advertisement Advertisement The supervisor said the town was looking to be \"proactive in protecting town residents\" from common complaints about high-energy use industries such as air and noise pollution.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/town-niagara-imposes-high-energy-111800317.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Advertisement Advertisement The supervisor said the town was looking to be \"proactive in protecting town residents\" from common complaints about high-energy use industries such as air and noise pollution. Deputy Town Supervisor Marc Carpenter said, \"We watched the struggles of Niagara Falls and North Tonawanda (after high-energy use industries) began operating there. We need to take a look at our (zoning) codes and make sure we're prepared.\" The town board also approved the hiring of a consultant to assist in a review and possible rewriting of the entire town zoning code.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/town-niagara-imposes-high-energy-111800317.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "\"It might be OK if it's in the right spot,\" board member Charles Teixeira said. \"Things here are moving quickly and we need to decide if (high-energy use industries) are a good fit for the town and our residents. Not every business is a good fit.\" After licensing its first crypto-mining facility in 2023, Niagara Falls remains embroiled in an ongoing dispute with a second company over noise concerns.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/town-niagara-imposes-high-energy-111800317.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "\"Things here moving quickly and we need to decide if (high-energy use industries) are a good fit for the town and our residents. Not every business is a good fit.\" Advertisement Advertisement After licensing its first crypto-mining facility in 2023, Niagara Falls remains embroiled in an ongoing dispute with a second company over noise concerns. That facility continues to be shut down.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/town-niagara-sets-september-hearing-214800116.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "\"It might be OK if it's in the right spot,\" Teixeira said. \"Things here moving quickly and we need to decide if (high-energy use industries) are a good fit for the town and our residents. Not every business is a good fit.\" Advertisement Advertisement After licensing its first crypto-mining facility in 2023, Niagara Falls remains embroiled in an ongoing dispute with a second company over noise concerns.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/town-niagara-sets-september-hearing-214800116.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Reporting mistakes helps us improve the experience. The updated PUD Petition answers all questions raised by counsel to the City of Niagara Falls related to the completeness of an earlier submission and provides critical new noise data showing the data center will comply with applicable standards. Niagara Falls Redevelopment has partnered with Urbacon Data Centre Solutions, a Toronto-based developer, on the project, and officials believe that working cooperatively to make the Niagara Digital Campus a reality would be a game-changer for the city, its residents, and the local economy.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/nfr-files-data-center-documents-035900861.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "The first document filed is an updated planned unit development (PUD) Petition, pursuant to Section 1318 of the City Zoning Ordinance. The document answers all questions raised by counsel to the City of Niagara Falls related to the completeness of an earlier, 500-page PUD submission filed in October 2024 and provides critical new noise data showing the data center will comply with the applicable standards. The second filing is a “Text Amendment Request to Revise the city’s High Energy Use Law,” which was enacted in late 2022.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/nfr-files-data-center-documents-035900861.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "The proposed data center campus would consist of nine buildings totaling over 1.2 million square feet, with NFR owning the majority of the land needed for the project. Concerns have been raised about noise, over-industrialization, and impacts on tourism and history, with a Planning Board workshop planned to address remaining questions and concerns before a vote in September. See more For more than four hours Wednesday night, Falls residents, lawyers, architects, consultants and engineers working for Niagara Falls Redevelopment (NFR) and members of the city’s Planning Board weighed, in sometimes excruciating detail, the pros and cons of a proposed Negotiated Planned Development District, also known as a Planned Unit District (PUD), for the purpose of developing a proposed $1.5 billion data center campus in the South End.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/articles/niagara-falls-planning-board-takes-035900927.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Only two residents attended a public hearing in Niagara Falls regarding a request to modify the city’s zoning code restrictions on high-energy use industries, with one resident urging the Planning Board not to change the existing ordinance. The NFR affiliate is proposing to eliminate the ban on high-energy use industries outside industrial zones, increase permitted noise levels from high-energy facilities, and allow the city council to approve changes to setback and buffer requirements, arguing that these changes would make the law more flexible. The proposed zoning code changes by NFR would eliminate current high-energy use restrictions, potentially allowing data centers or bitcoin mines to be located next to homes in residential neighborhoods, prompting concerns from Planning Board members about protecting residents.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/articles/niagara-falls-planning-board-weighs-214800067.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "The city council's acceptance of a draft environmental impact statement from BlockFusion triggered a public review process required for the approval of a high-energy use operating permit. Complaints about noise from bitcoin mining facilities led to the city adopting strict regulations on high-energy use industries, causing BlockFusion to cease operations and apply for an operating permit. See more The Niagara Falls Planning Board will hold a public hearing Wednesday on a long delayed request for an operating permit from a Frontier Avenue bitcoin miner.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/niagara-falls-planning-board-hold-111900810.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Creation of the overlay zoning district would allow BlockFusion to obtain a high-energy use industry operating permit from the city and resume its bitcoin mining operations. Almost two years after its future was left in limbo by inaction from the Niagara Falls City Council, city lawmakers in February agreed to accept a draft environmental impact statement (DEIS) from BlockFusion which declares that noise coming from its bitcoin mining operation is within the limits outlined in a series of city zoning ordinances that impose strict regulations on the operation of so-called “high-energy use industries.” Advertisement Advertisement The council’s action triggered the start of a public review process, required for the approval of a high-energy use operating permit for BlockFusion. Adopting the DEIS resolution opened a 31-day window for the public to submit comments on BlockFusion’s permit request.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/niagara-falls-planning-board-hold-111900810.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Adopting the DEIS resolution opened a 31-day window for the public to submit comments on BlockFusion’s permit request. It also re-started a process that stalled in July 2023 when the then-city council members split on approving an operating permit for BlockFusion in a dispute over the amount of noise its bitcoin mining was generating. Complaints about the noise created by bitcoin mining facilities that had set up shop in the Falls led the city, in September 2022, to adopt a series of Zoning Code amendments that imposed strict new regulations on the operation of “high-energy use industries.” At a public hearing on the then-proposed amendments, one Falls resident described the noise coming from a nearby bitcoin mining facility as equivalent to “a 747 revving up on Buffalo Avenue.” The Zoning Code amendments restricted high-energy use facilities like data centers and bitcoin mining operations to locations that are zoned only for industrial uses.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/niagara-falls-planning-board-hold-111900810.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "It also re-started a process that stalled in July 2023 when the then-city council members split on approving an operating permit for BlockFusion in a dispute over the amount of noise its bitcoin mining was generating. Complaints about the noise created by bitcoin mining facilities that had set up shop in the Falls led the city, in September 2022, to adopt a series of Zoning Code amendments that imposed strict new regulations on the operation of “high-energy use industries.” At a public hearing on the then-proposed amendments, one Falls resident described the noise coming from a nearby bitcoin mining facility as equivalent to “a 747 revving up on Buffalo Avenue.” The Zoning Code amendments restricted high-energy use facilities like data centers and bitcoin mining operations to locations that are zoned only for industrial uses. The amendments also created an “overlay” to the city’s current industrial zone requirements, adding restrictions that require larger setbacks from residential areas and imposing strict limits on the noise generated by the high energy use operations.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/niagara-falls-planning-board-hold-111900810.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "Complaints about the noise created by bitcoin mining facilities that had set up shop in the Falls led the city, in September 2022, to adopt a series of Zoning Code amendments that imposed strict new regulations on the operation of “high-energy use industries.” At a public hearing on the then-proposed amendments, one Falls resident described the noise coming from a nearby bitcoin mining facility as equivalent to “a 747 revving up on Buffalo Avenue.” The Zoning Code amendments restricted high-energy use facilities like data centers and bitcoin mining operations to locations that are zoned only for industrial uses. The amendments also created an “overlay” to the city’s current industrial zone requirements, adding restrictions that require larger setbacks from residential areas and imposing strict limits on the noise generated by the high energy use operations. Advertisement Advertisement When the new requirements went into effect in November 2022, BlockFusion ceased operations and applied for an operating permit for its Frontier Avenue facility.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/niagara-falls-planning-board-hold-111900810.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "However, the application languished in a dispute with city officials over the amount of noise coming from the facility and the measures BlockFusion had taken to reduce it. The Zoning Code overlay caps the noise from a high-energy use facility at 65 decibels, measured at the property line of the residence closest to the operation. A BlockFusion attorney has said a consultant, hired by the bitcoin miner, measured the noise level at the nearest residence to their facility, which is surrounded by other industrial operations, at 55.5 decibels.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/niagara-falls-planning-board-hold-111900810.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "The Zoning Code overlay caps the noise from a high-energy use facility at 65 decibels, measured at the property line of the residence closest to the operation. A BlockFusion attorney has said a consultant, hired by the bitcoin miner, measured the noise level at the nearest residence to their facility, which is surrounded by other industrial operations, at 55.5 decibels. The city disputed that finding, claiming that when the facility fired up, its operations increased the ambient noise level in its neighborhood above the 65-decibel threshold.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/niagara-falls-planning-board-hold-111900810.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "A BlockFusion attorney has said a consultant, hired by the bitcoin miner, measured the noise level at the nearest residence to their facility, which is surrounded by other industrial operations, at 55.5 decibels. The city disputed that finding, claiming that when the facility fired up, its operations increased the ambient noise level in its neighborhood above the 65-decibel threshold. Advertisement Advertisement The adopted council resolution resolves the decibel debate.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/niagara-falls-planning-board-hold-111900810.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      },
+      {
+        "statement": "The Niagara County Planning Board denied a recommendation for proposed changes to Niagara Falls’ zoning code requirements for high-energy use industries, including bitcoin mines and data centers, by a vote of 5-1. The proposed “text amendment” by Eleventh Street Properties LLC, an affiliate of Niagara Falls Redevelopment, aimed to eliminate a ban on high-energy use industries outside of industrial zones, increase permitted noise levels, and grant the city council the ability to approve waivers to setback and buffer requirements. The changes in high-energy use restrictions sought by NFR are connected to a proposed $1.5 billion data center campus development in Niagara Falls’ South End, with the city council expressing opposition to the proposed amendments.",
+        "date": "Unknown",
+        "source": "https://www.yahoo.com/news/articles/proposed-high-energy-zoning-changes-035900259.html?fr=sycsrp_catchall",
+        "source-details": "Yahoo News"
+      }
+    ]
+  }
 ]
