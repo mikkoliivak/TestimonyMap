@@ -49,7 +49,7 @@ MAX_ARTICLES_PER_QUERY = 10
 SENTENCES_BEFORE = 1
 SENTENCES_AFTER = 1
 DELAY_SECONDS = 2
-WAIT_FOR_RESULTS_SEC = 5   # seconds to wait for Yahoo search results to load
+WAIT_FOR_RESULTS_SEC = 5
 
 
 def now_iso_utc():
