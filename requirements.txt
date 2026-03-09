@@ -5,7 +5,9 @@ folium>=0.15.0
 jupyter>=1.0.0
 notebook>=7.0.0
 
-# Scraper (yahoo_news_scraper.py)
+# Web app (serve testimonies + accept new ones)
+flask>=3.0.0
+
 beautifulsoup4>=4.12.0
 pandas>=2.0.0
 selenium>=4.15.0
