@@ -52,7 +52,15 @@ export default function MapView({ centers }) {
   if (!centers?.length) {
     return (
       <section className="map-container">
-        <div className="map" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-surface)' }}>
+        <div
+          className="map"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'var(--color-surface)',
+          }}
+        >
           <p style={{ color: 'var(--color-text-muted)' }}>No center data to display.</p>
         </div>
         <div className="map-legend">
@@ -74,8 +82,8 @@ export default function MapView({ centers }) {
           style={{ height: '70vh', minHeight: 400 }}
         >
           <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
           />
           <MapFitBounds centers={centers} />
           <CenterMarkers centers={centers} onViewTestimonies={handleViewTestimonies} />

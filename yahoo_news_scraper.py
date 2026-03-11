@@ -1,18 +1,14 @@
-# -*- coding: utf-8 -*-
-"""
-News testimony scraper with Selenium + BeautifulSoup.
-Searches Yahoo News by keyword (Selenium loads JS), then extracts sound-related
-quotes + context into testimonies (centers.json format).
-"""
-
 from bs4 import BeautifulSoup
 from urllib.parse import quote_plus, parse_qs, unquote
 from urllib.parse import urlparse
 import re
 import json
 import time
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 import pandas as pd
+import requests
 
 try:
     import trafilatura  # type: ignore
@@ -25,6 +21,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 
 KEYWORDS = [
     "data center noise greenidge",
@@ -192,6 +189,8 @@ def get_driver():
     opts.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     try:
         driver = webdriver.Chrome(options=opts)
+        # Set a hard page-load timeout so individual articles can't hang forever.
+        driver.set_page_load_timeout(20)
         return driver
     except Exception as e:
         print("Selenium: could not start Chrome. Install Chrome and try again:", e)
@@ -215,6 +214,83 @@ def search_yahoo_news(driver, keyword):
         return []
 
     return parse_yahoo_search_results(html, max_items=MAX_ARTICLES_PER_QUERY)
+
+
+REQUESTS_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) "
+                  "Chrome/120.0.0.0 Safari/537.36",
+}
+
+
+def search_google_news_rss(keyword, max_items=10):
+    """Fetch Google News RSS feed for a keyword. No Selenium needed."""
+    query = quote_plus(keyword)
+    url = "https://news.google.com/rss/search?q={}&hl=en-US&gl=US&ceid=US:en".format(query)
+    try:
+        resp = requests.get(url, timeout=15, headers=REQUESTS_HEADERS)
+        resp.raise_for_status()
+    except Exception as e:
+        print("  [skip] Google News RSS failed: {}".format(e))
+        return []
+
+    try:
+        root = ET.fromstring(resp.text)
+    except ET.ParseError as e:
+        print("  [skip] Google News RSS XML parse error: {}".format(e))
+        return []
+
+    items = []
+    for item in root.iter("item"):
+        if len(items) >= max_items:
+            break
+        title = (item.findtext("title") or "").strip()
+        link = (item.findtext("link") or "").strip()
+        pub_date = (item.findtext("pubDate") or "").strip()
+        source_el = item.find("source")
+        publisher = (source_el.text or "").strip() if source_el is not None else ""
+        description = (item.findtext("description") or "").strip()
+
+        if not link or not link.startswith("http"):
+            continue
+
+        # Parse RFC 2822 date from RSS
+        pubdate_raw = ""
+        if pub_date:
+            try:
+                dt = parsedate_to_datetime(pub_date)
+                pubdate_raw = dt.strftime("%b %d, %Y")
+            except Exception:
+                pubdate_raw = pub_date
+
+        # Strip HTML from description
+        if description:
+            description = BeautifulSoup(description, "html.parser").get_text(" ", strip=True)
+
+        items.append({
+            "link": link,
+            "title": title,
+            "pubdate_raw": pubdate_raw,
+            "description": description,
+            "publisher": publisher,
+        })
+
+    return items
+
+
+def fetch_article_lightweight(url):
+    """
+    Fetch article HTML with requests (no Selenium).
+    Returns (final_url, html) or None on failure.
+    """
+    try:
+        resp = requests.get(
+            url, timeout=15, headers=REQUESTS_HEADERS, allow_redirects=True,
+        )
+        resp.raise_for_status()
+        return resp.url, resp.text
+    except Exception:
+        return None
 
 
 def normalize_date(pubdate_str):
@@ -384,16 +460,26 @@ def get_context(sentences, idx, before=1, after=1):
 
 def fetch_article_html(driver, url):
     """Fetch an article with Selenium and return (final_url, html)."""
-    driver.get(url)
+    try:
+        driver.get(url)
+    except TimeoutException:
+        # Stop loading and use whatever content we have so far, or skip if empty.
+        try:
+            driver.execute_script("window.stop();")
+        except Exception:
+            pass
     time.sleep(1)
-    final_url = driver.current_url or url
+    try:
+        final_url = driver.current_url or url
+    except Exception:
+        final_url = url
     html = driver.page_source
     return final_url, html
 
 
 def extract_quotes_from_article(
-    driver,
     url,
+    driver=None,
     rss_description="",
     result_title="",
     result_publisher="",
@@ -401,7 +487,11 @@ def extract_quotes_from_article(
     search_keyword="",
 ):
     """
-    Load article with Selenium, extract main text + metadata, then extract sound quotes + context.
+    Fetch article and extract sound-related quotes + context.
+
+    Tries a lightweight requests fetch first (less detectable).
+    Falls back to Selenium only if the lightweight fetch fails or
+    returns too little text (JS-heavy page).
 
     Returns:
       testimonies: list of {statement, extraction_method}
@@ -414,10 +504,28 @@ def extract_quotes_from_article(
         r"(" + "|".join(re.escape(w) for w in TOPIC_WORDS) + r")", re.I
     )
     testimonies = []
-    try:
-        final_url, html = fetch_article_html(driver, url)
-    except Exception as e:
-        print("    [skip] Could not fetch:", e)
+
+    # --- Try lightweight fetch first (requests, no Selenium) ---
+    html = None
+    final_url = url
+    result = fetch_article_lightweight(url)
+    if result:
+        final_url, html = result
+        # If the extracted text is too short, the page likely needs JS rendering
+        quick_text = extract_main_text(html, url=final_url)
+        if len(quick_text) < 200:
+            html = None
+
+    # --- Fall back to Selenium if lightweight fetch failed ---
+    if html is None and driver is not None:
+        try:
+            final_url, html = fetch_article_html(driver, url)
+        except Exception as e:
+            print("    [skip] Could not fetch:", e)
+            return [], {}
+
+    if html is None:
+        print("    [skip] Could not fetch (no driver available)")
         return [], {}
 
     publisher_html = extract_publisher_from_html(html, final_url)
@@ -490,65 +598,82 @@ def extract_quotes_from_article(
     return testimonies, meta
 
 
+def _process_search_results(items, search_keyword, search_source, driver, all_testimonies, seen):
+    """Process a list of search result items from any source."""
+    for art in items:
+        link = art["link"]
+        result_title = art.get("title", "")
+        result_publisher = art.get("publisher", "")
+        result_pubdate_raw = art.get("pubdate_raw", "")
+        result_snippet = art.get("description", "")
+
+        quotes, meta = extract_quotes_from_article(
+            link,
+            driver=driver,
+            rss_description=result_snippet,
+            result_title=result_title,
+            result_publisher=result_publisher,
+            result_pubdate_raw=result_pubdate_raw,
+            search_keyword=search_keyword,
+        )
+
+        pub = meta.get("published_norm") or normalize_date(result_pubdate_raw)
+        publisher_final = meta.get("publisher_final") or (result_publisher or "").strip() or source_name(link)
+        title_final = meta.get("title_final") or (result_title or "").strip()
+        url_final = meta.get("url_final") or link
+
+        for q in quotes:
+            st = (q.get("statement") or "").strip()
+            if not st or len(st) < 25:
+                continue
+            key = st[:200]
+            if key in seen:
+                continue
+            seen.add(key)
+            all_testimonies.append({
+                "statement": st,
+                "date": pub or "Unknown",
+                "source": url_final,
+                "source-details": publisher_final,
+
+                # Extra metadata (keeps map-compatible keys above)
+                "publisher": publisher_final,
+                "article_title": title_final,
+                "search_keyword": search_keyword,
+                "search_source": search_source,
+                "retrieved_at": now_iso_utc(),
+                "extraction_method": (q.get("extraction_method") or ""),
+                "result_snippet": result_snippet,
+                "result_publisher": result_publisher,
+                "result_pubdate_raw": result_pubdate_raw,
+                "url_requested": meta.get("url_requested") or link,
+            })
+        time.sleep(DELAY_SECONDS)
+
+
 def run_scraper(save_path="scraped_testimonies.json"):
     driver = None
     try:
         driver = get_driver()
         all_testimonies = []
         seen = set()
+
+        # --- Google News RSS (no Selenium needed for search) ---
+        for kw in KEYWORDS:
+            print("Searching Google News RSS: '{}'".format(kw))
+            items = search_google_news_rss(kw, max_items=MAX_ARTICLES_PER_QUERY)
+            print("  Found {} articles".format(len(items)))
+            _process_search_results(items, kw, "google_news_rss", driver, all_testimonies, seen)
+            time.sleep(DELAY_SECONDS)
+
+        # --- Yahoo News (Selenium search) ---
         for kw in KEYWORDS:
             print("Searching Yahoo News: '{}'".format(kw))
             items = search_yahoo_news(driver, kw)
             print("  Found {} articles".format(len(items)))
+            _process_search_results(items, kw, "yahoo_news", driver, all_testimonies, seen)
             time.sleep(DELAY_SECONDS)
-            for art in items:
-                link = art["link"]
-                result_title = art.get("title", "")
-                result_publisher = art.get("publisher", "")
-                result_pubdate_raw = art.get("pubdate_raw", "")
-                result_snippet = art.get("description", "")
 
-                quotes, meta = extract_quotes_from_article(
-                    driver,
-                    link,
-                    rss_description=result_snippet,
-                    result_title=result_title,
-                    result_publisher=result_publisher,
-                    result_pubdate_raw=result_pubdate_raw,
-                    search_keyword=kw,
-                )
-
-                pub = meta.get("published_norm") or normalize_date(result_pubdate_raw)
-                publisher_final = meta.get("publisher_final") or (result_publisher or "").strip() or source_name(link)
-                title_final = meta.get("title_final") or (result_title or "").strip()
-                url_final = meta.get("url_final") or link
-
-                for q in quotes:
-                    st = (q.get("statement") or "").strip()
-                    if not st or len(st) < 25:
-                        continue
-                    key = st[:200]
-                    if key in seen:
-                        continue
-                    seen.add(key)
-                    all_testimonies.append({
-                        "statement": st,
-                        "date": pub or "Unknown",
-                        "source": url_final,
-                        "source-details": publisher_final,
-
-                        # Extra metadata (keeps map-compatible keys above)
-                        "publisher": publisher_final,
-                        "article_title": title_final,
-                        "search_keyword": kw,
-                        "retrieved_at": now_iso_utc(),
-                        "extraction_method": (q.get("extraction_method") or ""),
-                        "result_snippet": result_snippet,
-                        "result_publisher": result_publisher,
-                        "result_pubdate_raw": result_pubdate_raw,
-                        "url_requested": meta.get("url_requested") or link,
-                    })
-                time.sleep(DELAY_SECONDS)
         with open(save_path, "w", encoding="utf-8") as f:
             json.dump(all_testimonies, f, indent=2, ensure_ascii=False)
         print("\nSaved {} testimonies to {}".format(len(all_testimonies), save_path))
