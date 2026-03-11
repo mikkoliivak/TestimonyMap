@@ -278,6 +278,40 @@ def search_google_news_rss(keyword, max_items=10):
     return items
 
 
+def resolve_google_news_url(driver, url):
+    """
+    Resolve a Google News redirect URL (https://news.google.com/rss/articles/...)
+    to the actual article URL by following the JS redirect in Selenium.
+    Returns the resolved URL, or the original URL if resolution fails.
+    """
+    if "news.google.com" not in url:
+        return url
+    try:
+        # Temporarily increase timeout for the redirect page
+        driver.set_page_load_timeout(30)
+        try:
+            driver.get(url)
+        except TimeoutException:
+            try:
+                driver.execute_script("window.stop();")
+            except Exception:
+                pass
+        # Give the JS redirect a moment
+        time.sleep(2)
+        final = driver.current_url or url
+        # Restore original timeout
+        driver.set_page_load_timeout(20)
+        if final and "news.google.com" not in final and final.startswith("http"):
+            return final
+    except Exception as e:
+        print("    [skip] Could not resolve Google News URL:", e)
+        try:
+            driver.set_page_load_timeout(20)
+        except Exception:
+            pass
+    return url
+
+
 def fetch_article_lightweight(url):
     """
     Fetch article HTML with requests (no Selenium).
@@ -602,6 +636,13 @@ def _process_search_results(items, search_keyword, search_source, driver, all_te
     """Process a list of search result items from any source."""
     for art in items:
         link = art["link"]
+        # Resolve Google News redirect URLs to actual article URLs
+        if "news.google.com" in link and driver is not None:
+            resolved = resolve_google_news_url(driver, link)
+            if resolved != link:
+                print("    Resolved: {} -> {}".format(link[:60], resolved[:80]))
+                link = resolved
+                art["link"] = link
         result_title = art.get("title", "")
         result_publisher = art.get("publisher", "")
         result_pubdate_raw = art.get("pubdate_raw", "")
@@ -716,22 +757,36 @@ def merge_into_centers(
         "Blockfusion (Niagara Falls)": ["blockfusion", "niagara falls"],
     }
 
-    # Build sets of existing statements per center to avoid duplicates
+    # Build lists of existing statements per center to check near-duplicates
     existing = {}
     for center in centers:
         name = center.get("name")
-        stmts = set()
+        stmts = []
         for t in center.get("testimonies", []):
             s = t.get("statement", "").strip()
             if s:
-                stmts.add(s)
+                stmts.append(s)
         existing[name] = stmts
+
+    def _is_near_duplicate(new_stmt, existing_stmts):
+        """Check if new_stmt is a near-duplicate of any existing statement."""
+        for ex in existing_stmts:
+            if new_stmt in ex or ex in new_stmt:
+                return True
+            if len(new_stmt) > 50 and len(ex) > 50 and new_stmt[:100] == ex[:100]:
+                return True
+        return False
+
+    # Clean 'Advertisement' filler from incoming statements
+    adv_pat = re.compile(r"\bAdvertisement\b")
 
     added = 0
     for t in scraped:
         statement = (t.get("statement") or "").strip()
+        statement = re.sub(r"\s+", " ", adv_pat.sub("", statement)).strip()
+        t["statement"] = statement
         source = (t.get("source") or "").strip()
-        if not statement:
+        if not statement or len(statement) < 30:
             continue
         text = (statement + " " + source).lower()
 
@@ -743,12 +798,12 @@ def merge_into_centers(
         if not target_name or target_name not in name_to_idx:
             continue
 
-        if statement in existing.get(target_name, set()):
+        if _is_near_duplicate(statement, existing.get(target_name, [])):
             continue
 
         idx = name_to_idx[target_name]
         centers[idx].setdefault("testimonies", []).append(t)
-        existing[target_name].add(statement)
+        existing[target_name].append(statement)
         added += 1
 
     if added:
