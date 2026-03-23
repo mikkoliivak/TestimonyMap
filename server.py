@@ -1,23 +1,18 @@
-"""
-Minimal Flask server: serves the testimonies website, centers.json (merged with
-user-submitted testimonies), and accepts POST to add new testimonies.
-Run: python server.py
-Then open http://127.0.0.1:5000
-"""
 import json
 import os
 import copy
 from pathlib import Path
 
 from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
 
 APP_DIR = Path(__file__).resolve().parent
 CENTERS_PATH = APP_DIR / "centers.json"
 USER_TESTIMONIES_PATH = APP_DIR / "user_testimonies.json"
-# React build output (run: cd web && npm run build)
 STATIC_DIR = APP_DIR / "web" / "dist"
 
 app = Flask(__name__, static_folder=str(STATIC_DIR), static_url_path="")
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
 def load_centers():
