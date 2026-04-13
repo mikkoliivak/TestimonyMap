@@ -63,7 +63,6 @@ def index():
 
 @app.route("/<path:path>")
 def static_files(path):
-    # Serve static assets; otherwise SPA fallback for client-side routes
     file_path = STATIC_DIR / path
     if file_path.is_file():
         return send_from_directory(STATIC_DIR, path)

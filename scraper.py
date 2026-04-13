@@ -1,8 +1,4 @@
-"""
-News scraper for data-center noise testimonies.
-Pipeline: config → search → fetch → filter → save → merge
-Source: Bing News RSS (direct URLs, no API key needed).
-"""
+"""Scrape data-center noise testimonies from Bing News RSS."""
 
 import math
 import re
@@ -17,9 +13,6 @@ from urllib.parse import quote_plus, parse_qs, urlparse, unquote
 import requests
 import trafilatura
 
-# ── CONFIG ────────────────────────────────────────────────────────
-
-# Generic topic terms; each center name (lowercased) is also a topic/merge string from FACILITIES.
 BASE_TOPIC_WORDS = [
     "data center", "datacenter", "server farm", "computing facility",
     "crypto", "cryptocurrency", "bitcoin", "mining", "mining facility",
@@ -64,14 +57,12 @@ def _compile_topic_re(facilities: dict):
     return re.compile(r"(" + "|".join(re.escape(w) for w in uniq) + r")", re.I)
 
 
-# EPA Noise Control Act + WHO Environmental Noise Guidelines
 IMPACT_TERMS = [
     "noise", "noise complaint", "noise pollution",
     "health effects noise", "sleep disturbance",
     "residents complaints", "decibel", "noise ordinance",
 ]
 
-# Passage must contain ≥1 noise word AND ≥1 topic word
 NOISE_WORDS = [
     "noise", "noisy", "loud", "loudness", "roar", "roaring", "hum", "humming",
     "buzz", "buzzing", "drone", "droning", "rumble", "rumbling", "whine",
@@ -99,8 +90,6 @@ def reload_facilities():
     global FACILITIES, TOPIC_RE
     FACILITIES = load_facilities_from_centers()
     TOPIC_RE = _compile_topic_re(FACILITIES)
-
-# ── SEARCH ────────────────────────────────────────────────────────
 
 def generate_queries():
     queries, seen = [], set()
@@ -159,8 +148,6 @@ def search_bing_news(keyword, max_items=MAX_ARTICLES_PER_QUERY):
         items.append({"link": link, "title": title, "date": date_str, "publisher": publisher})
     return items
 
-# ── FETCH ─────────────────────────────────────────────────────────
-
 def fetch_and_extract(url):
     try:
         html = trafilatura.fetch_url(url)
@@ -180,8 +167,6 @@ def fetch_all(urls):
             url, text = fut.result()
             results[url] = text
     return results
-
-# ── FILTER ────────────────────────────────────────────────────────
 
 def find_relevant_passages(text, title=""):
     """Topic match uses article title + excerpt so headlines that name the site still qualify."""
@@ -204,8 +189,6 @@ def find_relevant_passages(text, title=""):
             seen.add(key)
             passages.append(block)
     return passages
-
-# ── SAVE + MERGE ──────────────────────────────────────────────────
 
 def run_scraper(save_path="scraped_testimonies.json"):
     queries = generate_queries()
@@ -268,16 +251,41 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
         for c in centers
     }
 
-    def pick_facility_for_merge(text: str):
-        """Assign to the facility whose merge keyword is the longest substring match."""
-        text_l = text.lower()
-        best_name, best_len = None, 0
-        for name, info in FACILITIES.items():
-            for kw in info["merge_keywords"]:
-                if kw in text_l and len(kw) > best_len:
-                    best_len = len(kw)
-                    best_name = name
-        return best_name
+    def _kw_pattern(kw: str):
+        parts = [re.escape(p) for p in kw.split() if p]
+        if not parts:
+            return None
+        return re.compile(r"\b" + r"\s+".join(parts) + r"\b", re.I)
+
+    facility_patterns = {}
+    for name, info in FACILITIES.items():
+        pats = []
+        for kw in info["merge_keywords"]:
+            p = _kw_pattern(kw.strip().lower())
+            if p:
+                pats.append((kw, p))
+        facility_patterns[name] = pats
+
+    def evidence_for_facility(name: str, text: str) -> int:
+        best = 0
+        for kw, pat in facility_patterns.get(name, []):
+            if pat.search(text):
+                best = max(best, len(kw))
+        return best
+
+    def pick_facility_for_merge(statement_text: str, article_title: str, source_url: str):
+        title_text = (article_title or "").strip().lower()
+        stmt_text = (statement_text or "").strip().lower()
+        source_text = (source_url or "").strip().lower()
+        best_name, best_score = None, 0
+        for name in FACILITIES:
+            title_score = evidence_for_facility(name, title_text)
+            stmt_score = evidence_for_facility(name, stmt_text)
+            source_score = evidence_for_facility(name, source_text)
+            score = max(title_score, stmt_score, source_score)
+            if score > best_score:
+                best_name, best_score = name, score
+        return best_name, best_score
 
     added = 0
     for t in scraped:
@@ -285,18 +293,16 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
         if len(stmt) < 30:
             continue
         hint = (t.get("facility_hint") or "").strip()
+        title = (t.get("article_title") or "")
+        source = (t.get("source") or "")
+        target, score = pick_facility_for_merge(stmt, title, source)
         if hint in name_to_idx:
-            target = hint
-        else:
-            text = (
-                stmt
-                + " "
-                + (t.get("source") or "")
-                + " "
-                + (t.get("article_title") or "")
-            )
-            target = pick_facility_for_merge(text)
+            hint_score = evidence_for_facility(hint, f"{title} {stmt}".lower())
+            if hint_score > 0:
+                target, score = hint, hint_score
         if not target or target not in name_to_idx:
+            continue
+        if score < 6:
             continue
         if any(stmt in ex or ex in stmt for ex in existing[target]):
             continue
@@ -311,8 +317,6 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
     print(f"[merge] Added {added} new testimonies into {centers_path}")
 
 
-# ── OSM UPDATE ───────────────────────────────────────────────────
-
 OVERPASS_URLS = [
     "https://overpass.kumi.systems/api/interpreter",
     "https://overpass-api.de/api/interpreter",
@@ -325,7 +329,6 @@ OVERPASS_QUERY = """
 out center;
 """
 
-# ~0.5 km — close enough to be the same facility
 _DEDUP_KM = 0.5
 
 
@@ -343,10 +346,8 @@ def _find_existing(center, existing_centers):
     for i, ec in enumerate(existing_centers):
         ec_name = ec["name"].lower()
         dist = _haversine_km(center["lat"], center["lng"], ec["lat"], ec["lng"])
-        # Same coords (< 0.5 km) → same facility
         if dist < _DEDUP_KM:
             return i
-        # Same name and within 5 km (accounts for minor coordinate drift)
         if name and ec_name and name == ec_name and dist < 5:
             return i
     return None
@@ -387,14 +388,12 @@ def update_centers_from_osm(centers_path="centers.json"):
         if not lat or not lon:
             continue
         if not name:
-            # Fall back to operator as name so the scraper has something to search
             name = (tags.get("operator") or "").strip()
         if not name:
             continue
 
         osm_center = {"name": name, "lat": lat, "lng": lon}
 
-        # Add optional OSM metadata
         if tags.get("operator"):
             osm_center["operator"] = tags["operator"]
         if tags.get("addr:full") or tags.get("addr:street"):
@@ -404,7 +403,6 @@ def update_centers_from_osm(centers_path="centers.json"):
 
         idx = _find_existing(osm_center, centers)
         if idx is not None:
-            # Update metadata on existing entry, but never overwrite testimonies or county
             existing = centers[idx]
             for key in ("operator", "address", "website"):
                 if osm_center.get(key) and not existing.get(key):
