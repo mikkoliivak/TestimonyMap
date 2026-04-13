@@ -292,7 +292,8 @@
         "search_source": "bing_news_rss",
         "retrieved_at": "2026-03-22T19:28:56.496507+00:00"
       }
-    ]
+    ],
+    "operator": "Greenidge Generation Holdings Inc."
   },
   {
     "name": "Lake Mariner",
@@ -1902,7 +1903,7 @@
     "lat": 29.672704799999998,
     "lng": -82.29984525,
     "operator": "University of Florida",
-    "address": "",
+    "address": "Northeast Waldo Road",
     "website": "https://www.rc.ufl.edu/services/hipergator/",
     "testimonies": []
   },
@@ -1921,7 +1922,7 @@
     "lng": -87.9539794,
     "operator": "",
     "address": "3135, West Highland Boulevard, Milwaukee, WI",
-    "website": "",
+    "website": "https://www.dataholdings.com/",
     "testimonies": []
   },
   {
@@ -2038,7 +2039,7 @@
     "lng": -77.2115713,
     "operator": "Lumen Technologies",
     "address": "1755, Old Meadow Road, McLean, VA",
-    "website": "",
+    "website": "https://www.databank.com/data-centers/northern-virginia/mclean/",
     "testimonies": []
   },
   {
@@ -2101,7 +2102,7 @@
     "lng": -87.63344,
     "operator": "Netrality",
     "address": "717, South Wells Street, Chicago, IL",
-    "website": "",
+    "website": "https://www.coresite.com/data-center/ch1-chicago-il",
     "testimonies": []
   },
   {
@@ -2285,15 +2286,6 @@
     "testimonies": []
   },
   {
-    "name": "IT",
-    "lat": 33.9102899,
-    "lng": -117.5030207,
-    "operator": "",
-    "address": "",
-    "website": "",
-    "testimonies": []
-  },
-  {
     "name": "Alembic Computer Services, Inc.",
     "lat": 33.4051307,
     "lng": -111.9773353,
@@ -2441,9 +2433,9 @@
     "name": "Open Data Centers Piscataway",
     "lat": 40.5503501,
     "lng": -74.4568563,
-    "operator": "",
-    "address": "",
-    "website": "",
+    "operator": "Barclays",
+    "address": "South Randolphville Road",
+    "website": "https://www.digitalrealty.com/data-centers/americas/new-york/ewr12",
     "testimonies": []
   },
   {
@@ -2451,7 +2443,7 @@
     "lat": 40.7853948,
     "lng": -74.0750122,
     "operator": "H5",
-    "address": "",
+    "address": "Enterprise Avenue North",
     "website": "",
     "testimonies": []
   },
@@ -2542,16 +2534,16 @@
     "lng": -77.45776528571427,
     "operator": "Equinix",
     "address": "22165, Beaumeade Circle, Sterling",
-    "website": "",
+    "website": "https://www.equinix.com/data-centers/americas-colocation/united-states-colocation/washington-dc-data-centers/dc2",
     "testimonies": []
   },
   {
     "name": "NTT Ashburn Campus (8 buildings)",
     "lat": 39.0196647375,
     "lng": -77.46843635,
-    "operator": "",
-    "address": "",
-    "website": "",
+    "operator": "Digital Realty",
+    "address": "Hastings Drive",
+    "website": "https://www.digitalrealty.com/data-centers/americas/northern-virginia/acc5",
     "testimonies": []
   },
   {
@@ -2729,7 +2721,7 @@
     "name": "11:11 Systems",
     "lat": 43.5982484,
     "lng": -79.7501312,
-    "operator": "",
+    "operator": "Cyxtera",
     "address": "2330, Argentia Road, Mississauga",
     "website": "",
     "testimonies": []
@@ -2758,14 +2750,14 @@
     "lng": -121.9699296,
     "operator": "Lumen Technologies",
     "address": "1380, Kifer Road, Sunnyvale, CA",
-    "website": "",
+    "website": "https://www.csquare.com/data-centers/silicon-valley#santaclara-sfo1",
     "testimonies": []
   },
   {
     "name": "OpenColo",
     "lat": 37.3788292,
     "lng": -121.9559257,
-    "operator": "",
+    "operator": "Equinix",
     "address": "3223, Kenneth Street, Santa Clara, CA",
     "website": "https://www.opencolo.com/",
     "testimonies": []
@@ -2812,7 +2804,7 @@
     "lng": -84.2357244,
     "operator": "",
     "address": "1650, Union Hill Road, Alpharetta, GA",
-    "website": "",
+    "website": "https://www.mapletreeindustrialtrust.com/property/1001-windward-concourse-alpharetta/",
     "testimonies": []
   },
   {
@@ -2839,7 +2831,7 @@
     "lng": -121.9616726,
     "operator": "Cologix",
     "address": "2050, Martin Avenue",
-    "website": "",
+    "website": "https://primedatacenters.com/santa-clara-data-centers/",
     "testimonies": []
   },
   {
@@ -2964,7 +2956,7 @@
     "lat": 39.0046933,
     "lng": -77.4417399,
     "operator": "Stack Infrastructure",
-    "address": "",
+    "address": "Cloud Plaza",
     "website": "https://www.stackinfra.com/locations/northern-virginia/?data_center=nva01a",
     "testimonies": []
   },
@@ -3019,7 +3011,7 @@
     "lng": -77.3273071,
     "operator": "Digital Realty",
     "address": "1780, Business Center Drive, Reston, VA",
-    "website": "",
+    "website": "https://evocative.com/data-centers/reston-va-data-center-iad1/",
     "testimonies": []
   },
   {
@@ -3073,7 +3065,7 @@
     "lng": -74.0651395,
     "operator": "Equinix",
     "address": "600, Jefferson Avenue, Secaucus, NJ",
-    "website": "",
+    "website": "https://coresite.com/data-center/ny2-secaucus-nj",
     "testimonies": []
   },
   {
@@ -3298,7 +3290,7 @@
     "lng": -87.9516655,
     "operator": "EdgeConneX",
     "address": "1800, Nicholas Boulevard, Elk Grove Village, IL",
-    "website": "",
+    "website": "https://www.edgeconnex.com/locations/americas/chicago-il/",
     "testimonies": []
   },
   {
@@ -3404,7 +3396,7 @@
     "name": "Optimum",
     "lat": 40.5468425,
     "lng": -74.4920459,
-    "operator": "",
+    "operator": "Equinix",
     "address": "",
     "website": "",
     "testimonies": []
@@ -3431,7 +3423,7 @@
     "name": "Intergate Seattle East Building 2",
     "lat": 47.4950309,
     "lng": -122.2905696,
-    "operator": "",
+    "operator": "Sabey",
     "address": "3311, South 120th Place, Tukwila, WA",
     "website": "",
     "testimonies": []
@@ -3458,16 +3450,16 @@
     "name": "Colovore",
     "lat": 37.3767228,
     "lng": -121.9531439,
-    "operator": "",
-    "address": "",
-    "website": "",
+    "operator": "Digital Realty",
+    "address": "Lafayette Street",
+    "website": "https://www.digitalrealty.com/data-centers/americas/silicon-valley/sjc11",
     "testimonies": []
   },
   {
     "name": "Evocative Santa Clara SJC11",
     "lat": 37.3895364,
     "lng": -121.9619398,
-    "operator": "",
+    "operator": "Amazon Web Services",
     "address": "2151, Mission College Boulevard",
     "website": "https://evocative.com/data-centers/santa-clara-ca-data-center-sjc11/",
     "testimonies": []
@@ -3566,7 +3558,7 @@
     "name": "COPT Data Center",
     "lat": 38.7473099,
     "lng": -77.5318265,
-    "operator": "",
+    "operator": "Amazon Web Services",
     "address": "9651, Hornbaker Road, Manassas, VA",
     "website": "",
     "testimonies": []
@@ -3595,7 +3587,7 @@
     "lng": -121.9464586,
     "operator": "Microsoft",
     "address": "2055, Lafayette Street, Santa Clara, CA",
-    "website": "",
+    "website": "https://vantage-dc.com/data-center-locations/north-america/santa-clara-ii-california/",
     "testimonies": []
   },
   {
@@ -3631,7 +3623,7 @@
     "lng": -121.2016324,
     "operator": "Google",
     "address": "",
-    "website": "",
+    "website": "https://www.google.com/about/datacenters/locations/the-dalles/",
     "testimonies": []
   },
   {
@@ -3719,9 +3711,9 @@
     "name": "32 Avenue of the Americas",
     "lat": 40.719994,
     "lng": -74.0045683,
-    "operator": "",
-    "address": "",
-    "website": "",
+    "operator": "Digital Realty",
+    "address": "Avenue of the Americas",
+    "website": "https://www.digitalrealty.com/data-centers/americas/new-york/jfk13",
     "testimonies": []
   },
   {
@@ -3755,8 +3747,8 @@
     "name": "Verizon",
     "lat": 36.1447332,
     "lng": -115.0779284,
-    "operator": "",
-    "address": "",
+    "operator": "Switch",
+    "address": "East Sahara Avenue",
     "website": "",
     "testimonies": []
   },
@@ -3829,7 +3821,7 @@
     "lng": -74.0257417,
     "operator": "Cyxtera",
     "address": "1919, Park Avenue, Weehawken, NJ",
-    "website": "",
+    "website": "https://www.digitalrealty.com/data-centers/americas/new-york/ewr10",
     "testimonies": []
   },
   {
@@ -3944,9 +3936,9 @@
     "name": "zColo by Zayo",
     "lat": 39.5913398,
     "lng": -104.8470655,
-    "operator": "",
+    "operator": "Flexential",
     "address": "6900, South Peoria Street, Centennial, CO",
-    "website": "",
+    "website": "https://www.flexential.com/data-centers/co/denver/centennial-data-center",
     "testimonies": []
   },
   {
@@ -3990,8 +3982,8 @@
     "lat": 39.022182,
     "lng": -77.4576094,
     "operator": "Lumen Technologies",
-    "address": "",
-    "website": "",
+    "address": "Chilum Place",
+    "website": "https://www.equinix.com/data-centers/americas-colocation/united-states-colocation/washington-dc-data-centers/dc3",
     "testimonies": []
   },
   {
@@ -4000,7 +3992,7 @@
     "lng": -111.8866379,
     "operator": "Digital Realty",
     "address": "2121, South Price Road, Chandler, AZ",
-    "website": "",
+    "website": "https://h5datacenters.com/phoenix-data-center.html",
     "testimonies": []
   },
   {
@@ -4027,7 +4019,7 @@
     "lng": -77.4855305,
     "operator": "Amazon Web Services",
     "address": "43790, Devin Shafron Drive, Ashburn",
-    "website": "",
+    "website": "https://www.digitalrealty.com/data-centers/americas/northern-virginia/iad14",
     "testimonies": []
   },
   {
@@ -4035,7 +4027,7 @@
     "lat": 39.0166962,
     "lng": -77.48198715000001,
     "operator": "Databank",
-    "address": "",
+    "address": "Red Rum Drive",
     "website": "",
     "testimonies": []
   },
@@ -4295,7 +4287,7 @@
     "name": "Cisco Allen",
     "lat": 33.1359616,
     "lng": -96.6609921,
-    "operator": "",
+    "operator": "CyrusOne",
     "address": "2260, Chelsea Boulevard",
     "website": "",
     "testimonies": []
@@ -4350,7 +4342,7 @@
     "lat": 30.261396,
     "lng": -97.7235975,
     "operator": "Lumen Technologies",
-    "address": "",
+    "address": "East 6th Street",
     "website": "",
     "testimonies": []
   },
@@ -4432,7 +4424,7 @@
     "lng": -97.7124025,
     "operator": "",
     "address": "4209, Smith School Road",
-    "website": "",
+    "website": "https://www.datafoundry.com/data-centers/data-foundry-01/",
     "testimonies": []
   },
   {
@@ -4476,7 +4468,7 @@
     "lat": 34.0362041,
     "lng": -84.05938276666667,
     "operator": "Quality Technology Services",
-    "address": "",
+    "address": "Satellite Boulevard Northwest",
     "website": "",
     "testimonies": []
   },
@@ -4611,8 +4603,8 @@
     "lat": 34.0473304,
     "lng": -118.25751,
     "operator": "",
-    "address": "",
-    "website": "",
+    "address": "South Grand Avenue",
+    "website": "https://onewilshire.com/",
     "testimonies": []
   },
   {
@@ -4808,7 +4800,7 @@
     "name": "BNY Mellon Somerset",
     "lat": 40.535869,
     "lng": -74.5534315,
-    "operator": "",
+    "operator": "Digital Realty",
     "address": "",
     "website": "",
     "testimonies": []
@@ -5161,7 +5153,7 @@
     "lng": -82.8049123,
     "operator": "",
     "address": "",
-    "website": "",
+    "website": "https://www.stackinfra.com/locations/new-albany/",
     "testimonies": []
   },
   {
@@ -5555,8 +5547,8 @@
     "name": "Bank of America Data Center",
     "lat": 37.4960545,
     "lng": -77.2381821,
-    "operator": "",
-    "address": "",
+    "operator": "Bank of America",
+    "address": "White Oak Creek Drive",
     "website": "",
     "testimonies": []
   },
@@ -5645,7 +5637,7 @@
     "name": "Centersquare Atlanta ATL1",
     "lat": 33.7442217,
     "lng": -84.5812119,
-    "operator": "",
+    "operator": "Digital Realty",
     "address": "375, Riverside Parkway, Lithia Springs, GA",
     "website": "https://centersquaredc.com/hubfs/CenterSquare/docs/Centersquare-ATL-SpecSheet.pdf",
     "testimonies": []
@@ -5672,8 +5664,8 @@
     "name": "Amazon Fadeley III",
     "lat": 38.9482726,
     "lng": -77.5215449,
-    "operator": "",
-    "address": "",
+    "operator": "Amazon Web Services",
+    "address": "Main Marconi Lane",
     "website": "",
     "testimonies": []
   },
@@ -5843,7 +5835,7 @@
     "name": "Tennessee Processing Center LLC",
     "lat": 36.2156443,
     "lng": -86.7840012,
-    "operator": "",
+    "operator": "BNYM",
     "address": "",
     "website": "",
     "testimonies": []
@@ -5880,8 +5872,8 @@
     "lat": 39.0144996,
     "lng": -77.4799874,
     "operator": "Sabey Data Centers",
-    "address": "",
-    "website": "",
+    "address": "Uunet Way",
+    "website": "https://www.equinix.com/data-centers/americas-colocation/united-states-colocation/washington-dc-data-centers/dc13",
     "testimonies": []
   },
   {
@@ -5889,7 +5881,7 @@
     "lat": 39.0110009,
     "lng": -77.46256525,
     "operator": "CloudHQ",
-    "address": "",
+    "address": "Sir Timothy Drive",
     "website": "",
     "testimonies": []
   },
@@ -5953,7 +5945,7 @@
     "lng": -95.9378494,
     "operator": "News-Press & Gazette Company",
     "address": "1623, Farnam Street, Omaha, NE",
-    "website": "",
+    "website": "https://www.fnts.com",
     "testimonies": []
   },
   {
@@ -6006,7 +5998,7 @@
     "lat": 41.4981292,
     "lng": -93.7884654,
     "operator": "Microsoft",
-    "address": "",
+    "address": "Southwest Kerry Street",
     "website": "",
     "testimonies": []
   },
@@ -6294,7 +6286,7 @@
     "lat": 38.9798678,
     "lng": -77.425476,
     "operator": "Amazon Web Services",
-    "address": "",
+    "address": "International Drive",
     "website": "",
     "testimonies": []
   },
@@ -6392,7 +6384,7 @@
     "name": "Iron Mountain VA-2 (6 buildings)",
     "lat": 38.774388816666665,
     "lng": -77.54338516666667,
-    "operator": "",
+    "operator": "Iron Mountain",
     "address": "",
     "website": "https://www.ironmountain.com/resources/solution-guides/d/data-centers-northern-virginia-va-2",
     "testimonies": []
@@ -6500,8 +6492,8 @@
     "name": "AWS",
     "lat": 38.9811948,
     "lng": -77.4179044,
-    "operator": "",
-    "address": "",
+    "operator": "Amazon Web Services",
+    "address": "Platform Plaza",
     "website": "",
     "testimonies": []
   },
@@ -6555,7 +6547,7 @@
     "lat": 47.41827659999999,
     "lng": -120.20973706666666,
     "operator": "Microsoft",
-    "address": "",
+    "address": "Urban Industrial Way",
     "website": "",
     "testimonies": []
   },
@@ -6619,7 +6611,7 @@
     "lng": -99.038336,
     "operator": "",
     "address": "",
-    "website": "",
+    "website": "https://www.computenorth.com",
     "testimonies": []
   },
   {
@@ -6691,7 +6683,7 @@
     "lng": -86.6269189,
     "operator": "Meta",
     "address": "",
-    "website": "",
+    "website": "https://datacenters.atmeta.com/wp-content/uploads/2023/03/Alabama-Huntsville.pdf",
     "testimonies": []
   },
   {
@@ -6762,7 +6754,7 @@
     "lat": 39.0195992,
     "lng": -77.4504568,
     "operator": "PowerHouse",
-    "address": "",
+    "address": "Beaumeade Circle",
     "website": "https://www.powerhousedata.com/data-center/powerhouse-abx-1",
     "testimonies": []
   },
@@ -6941,8 +6933,8 @@
     "name": "Amazon New Albany: Jug and Beach Road",
     "lat": 40.0990767,
     "lng": -82.7515054,
-    "operator": "",
-    "address": "",
+    "operator": "Amazon Web Services",
+    "address": "Horizon Court",
     "website": "",
     "testimonies": []
   },
@@ -7085,9 +7077,9 @@
     "name": "QTS Ashburn-Shellhorn",
     "lat": 38.9985896,
     "lng": -77.4748591,
-    "operator": "",
-    "address": "",
-    "website": "",
+    "operator": "Digital Realty",
+    "address": "Digital Loudoun Plaza",
+    "website": "https://www.digitalrealty.com/data-centers/americas/northern-virginia/iad37",
     "testimonies": []
   },
   {
@@ -7112,8 +7104,8 @@
     "name": "Vantage VA2",
     "lat": 38.9979532,
     "lng": -77.4302548,
-    "operator": "",
-    "address": "",
+    "operator": "Amazon Web Services",
+    "address": "Glenn Drive",
     "website": "",
     "testimonies": []
   },
@@ -7266,7 +7258,7 @@
     "lat": 38.7999718,
     "lng": -77.5833485,
     "operator": "Microsoft",
-    "address": "",
+    "address": "University Boulevard",
     "website": "",
     "testimonies": []
   },
@@ -7413,5 +7405,1257 @@
     "address": "",
     "website": "",
     "testimonies": []
+  },
+  {
+    "name": "NocRoom Miami IT Services",
+    "lat": 25.6465617,
+    "lng": -80.4234346,
+    "website": "https://nocroom.com"
+  },
+  {
+    "name": "Amazon Web Services IAD69",
+    "lat": 39.0254851,
+    "lng": -77.4146998,
+    "operator": "Amazon Web Services",
+    "address": "Nokes Boulevard",
+    "website": "https://www.cyrusone.com/data-centers/north-america/virginia/nva1-nva2-nva3-sterling"
+  },
+  {
+    "name": "Microsoft",
+    "lat": 18.4174359,
+    "lng": -66.1089895,
+    "operator": "Microsoft",
+    "address": "Avenida El Caño",
+    "website": "www,microsoft.com/es-pr"
+  },
+  {
+    "name": "Ntirety",
+    "lat": 37.7796531,
+    "lng": -122.3940005,
+    "operator": "Ntirety",
+    "address": "3rd Street"
+  },
+  {
+    "name": "IT",
+    "lat": 33.9102899,
+    "lng": -117.5030207
+  },
+  {
+    "name": "Flexential Nashville - Brentwood",
+    "lat": 35.9727294,
+    "lng": -86.8084949,
+    "operator": "Flexential",
+    "address": "Commerce Way",
+    "website": "https://www.flexential.com/data-centers/tn/nashville/brentwood-data-center"
+  },
+  {
+    "name": "NTT Ashburn VA7 Data Center",
+    "lat": 39.0160142,
+    "lng": -77.471954,
+    "operator": "NTT",
+    "address": "Gigabit Plaza",
+    "website": "https://services.global.ntt/en-us/services-and-products/global-data-centers/global-locations/americas/ashburn-va7-data-center"
+  },
+  {
+    "name": "TulsaConnect",
+    "lat": 36.153294,
+    "lng": -95.989193
+  },
+  {
+    "name": "Windstream",
+    "lat": 36.1485011,
+    "lng": -95.990514
+  },
+  {
+    "name": "Lumen Sunnyvale 1",
+    "lat": 37.3734695,
+    "lng": -121.9878002,
+    "operator": "Lumen Technologies",
+    "address": "Kifer Road",
+    "website": "https://www.equinix.com/data-centers/americas-colocation/united-states-colocation/silicon-valley-data-centers/sv15"
+  },
+  {
+    "name": "Amazon IAD11",
+    "lat": 38.7904948,
+    "lng": -77.5411095,
+    "operator": "Amazon Web Services",
+    "address": "Mason King Court"
+  },
+  {
+    "name": "Amazon IAD10",
+    "lat": 39.0216753,
+    "lng": -77.4329728,
+    "operator": "Amazon Web Services",
+    "address": "W Severn Way",
+    "website": "https://www.cyrusone.com/data-centers/north-america/virginia/nva5-sterling"
+  },
+  {
+    "name": "Csquare SFO2",
+    "lat": 37.397572,
+    "lng": -121.980963,
+    "operator": "Csquare",
+    "address": "Old Ironsides Drive"
+  },
+  {
+    "name": "Verizon Wireless",
+    "lat": 42.3262876,
+    "lng": -83.0769768,
+    "operator": "Verizon Wireless",
+    "address": "Bagley Street"
+  },
+  {
+    "name": "University of New Hampshire",
+    "lat": 43.1436204,
+    "lng": -70.9524471,
+    "operator": "University of New Hampshire",
+    "address": "Leavitt Lane"
+  },
+  {
+    "name": "CoreSite Reston VA3",
+    "lat": 38.9483343,
+    "lng": -77.3724298,
+    "operator": "CoreSite",
+    "address": "Sunrise Valley Drive",
+    "website": "https://www.coresite.com/data-center/va3-reston-va"
+  },
+  {
+    "name": "FirstLight",
+    "lat": 43.0761287,
+    "lng": -70.8080395,
+    "operator": "FirstLight",
+    "address": "Aviation Avenue"
+  },
+  {
+    "name": "Equinix NY7 Data Center",
+    "lat": 40.7968626,
+    "lng": -74.0311403,
+    "operator": "Equinix",
+    "address": "West Side Avenue",
+    "website": "https://www.equinix.com/data-centers/americas-colocation/united-states-colocation/new-york-data-centers/ny7"
+  },
+  {
+    "name": "Equinix SV4",
+    "lat": 37.4145109,
+    "lng": -122.0145563,
+    "operator": "Equinix",
+    "address": "Caspian Drive",
+    "website": "https://www.equinix.com/data-centers/americas-colocation/united-states-colocation/silicon-valley-data-centers/sv4"
+  },
+  {
+    "name": "Verizon",
+    "lat": 44.8071075,
+    "lng": -93.3753843,
+    "operator": "Verizon",
+    "address": "Bush Lake Road"
+  },
+  {
+    "name": "Patmos Hosting, Inc.",
+    "lat": 39.0944683,
+    "lng": -94.5794418,
+    "operator": "Patmos Hosting, Inc.",
+    "address": "McGee Street"
+  },
+  {
+    "name": "TierPoint",
+    "lat": 36.1585898,
+    "lng": -95.9886293,
+    "address": "East Archer Street North",
+    "website": "https://www.tierpoint.com/data-centers/oklahoma/tulsa-archer/"
+  },
+  {
+    "name": "Switch Las Vegas 7",
+    "lat": 36.0599191,
+    "lng": -115.210197,
+    "operator": "Switch",
+    "address": "South Decatur Boulevard"
+  },
+  {
+    "name": "RagingWire CA3",
+    "lat": 38.6442393,
+    "lng": -121.4987627,
+    "operator": "NTT",
+    "address": "National Driveq",
+    "website": "https://services.global.ntt/en-us/services-and-products/global-data-centers/global-locations/americas/sacramento-data-centers"
+  },
+  {
+    "name": "Equinix New York Secaucus NY5",
+    "lat": 40.7785845,
+    "lng": -74.0723242,
+    "operator": "Equinix",
+    "address": "Secaucus Road",
+    "website": "https://www.equinix.com/locations/united-states-colocation/new-york-data-centers/ny5/"
+  },
+  {
+    "name": "Silicon Valley SJC31",
+    "lat": 37.3722213,
+    "lng": -121.9482625,
+    "operator": "Digital Realty",
+    "address": "Lafayette Street",
+    "website": "https://www.digitalrealty.com/data-centers/americas/silicon-valley/sjc31"
+  },
+  {
+    "name": "TierPoint",
+    "lat": 42.6857078,
+    "lng": -71.2086024,
+    "operator": "TierPoint",
+    "address": "Shattuck Road"
+  },
+  {
+    "name": "Comcast",
+    "lat": 47.6933236,
+    "lng": -122.3173172,
+    "operator": "Comcast"
+  },
+  {
+    "name": "Amazon IAD-9",
+    "lat": 38.8997236,
+    "lng": -77.4534439,
+    "operator": "Amazon Web Services",
+    "address": "Westfax Drive"
+  },
+  {
+    "name": "Centersquare IAD2-A",
+    "lat": 38.9844198,
+    "lng": -77.4238096,
+    "operator": "Centersquare",
+    "address": "International Drive"
+  },
+  {
+    "name": "Digital Realty Data Center",
+    "lat": 33.6570094,
+    "lng": -84.4152195,
+    "operator": "Digital Realty",
+    "address": "Doug Davis Drive"
+  },
+  {
+    "name": "Amazon IAD76",
+    "lat": 38.9937936,
+    "lng": -77.450509,
+    "operator": "Amazon Web Services",
+    "address": "Randolph Drive"
+  },
+  {
+    "name": "Amazon IAD12",
+    "lat": 38.988724,
+    "lng": -77.447671,
+    "operator": "Amazon Web Services",
+    "address": "Dulles Summit Court"
+  },
+  {
+    "name": "Stack Infrastructure Portland 2 Data Center",
+    "lat": 45.5473758,
+    "lng": -122.8973869,
+    "address": "Northeast Evergreen Parkway",
+    "operator": "Digital Realty",
+    "website": "https://www.digitalrealty.com/data-centers/portland/3825-nw-aloclek-pl-hillsboro-or"
+  },
+  {
+    "name": "Flexential",
+    "lat": 45.5498253,
+    "lng": -122.8908454,
+    "operator": "Flexential",
+    "address": "Northeast Aloclek Drive",
+    "website": "https://www.flexential.com/data-centers/or/portland/hillsboro1-data-center"
+  },
+  {
+    "name": "TierPoint",
+    "lat": 47.6719149,
+    "lng": -117.0959323
+  },
+  {
+    "name": "Verizon Wireless",
+    "lat": 39.7171971,
+    "lng": -85.941411,
+    "operator": "Verizon Wireless",
+    "address": "West Stinemyer Road"
+  },
+  {
+    "name": "Claro",
+    "lat": 18.446827,
+    "lng": -66.0516873,
+    "operator": "Claro"
+  },
+  {
+    "name": "Flexential Denver - Englewood",
+    "lat": 39.558994,
+    "lng": -104.8375559,
+    "operator": "Flexential",
+    "address": "South Peoria Street",
+    "website": "https://www.flexential.com/data-centers/co/denver/englewood-data-center"
+  },
+  {
+    "name": "LightEdge Austin II",
+    "lat": 30.2006765,
+    "lng": -97.707046,
+    "address": "Burleson Road",
+    "website": "https://www.lightedge.com/austin-data-center/"
+  },
+  {
+    "name": "LightEdge Austin I",
+    "lat": 30.2142972,
+    "lng": -97.7126675,
+    "address": "Montopolis Drive",
+    "website": "https://www.lightedge.com/austin-data-center/"
+  },
+  {
+    "name": "Hurricane Electric Fremont 1",
+    "lat": 37.4898848,
+    "lng": -121.9310239,
+    "operator": "Hurricane Electric",
+    "address": "Mission Court"
+  },
+  {
+    "name": "Aligned Data Centers",
+    "lat": 41.4321977,
+    "lng": -82.7189574,
+    "operator": "Aligned Data Centers"
+  },
+  {
+    "name": "Equinix SV6",
+    "lat": 37.3996265,
+    "lng": -122.0145584,
+    "operator": "Equinix",
+    "address": "Toyama Drive",
+    "website": "https://www.equinix.co.uk/locations/united-states-colocation/silicon-valley-data-centers/sv6/"
+  },
+  {
+    "name": "Apple",
+    "lat": 44.2894155,
+    "lng": -120.8750774,
+    "operator": "Apple"
+  },
+  {
+    "name": "Verizon",
+    "lat": 41.338343,
+    "lng": -96.0278024,
+    "address": "World Communications Drive"
+  },
+  {
+    "name": "Microsoft",
+    "lat": 41.5406093,
+    "lng": -93.8248434,
+    "operator": "Microsoft"
+  },
+  {
+    "name": "Virginia Information Technologies Agency",
+    "lat": 37.3607028,
+    "lng": -77.3318065,
+    "address": "Meadowville Lane",
+    "website": "https://www.vita.virginia.gov/",
+    "operator": "Digital Fortress"
+  },
+  {
+    "name": "Lumen",
+    "lat": 47.6542257,
+    "lng": -117.4200007,
+    "operator": "Lumen Technologies",
+    "address": "West 2nd Avenue"
+  },
+  {
+    "name": "Amazon Web Services Datacenter Complex",
+    "lat": 39.0263311,
+    "lng": -77.4516315,
+    "operator": "Amazon Web Services",
+    "address": "Interconnection Plaza",
+    "website": "https://www.equinix.com/data-centers/americas-colocation/united-states-colocation/washington-dc-data-centers/dc16"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 39.0288072,
+    "lng": -77.4588379,
+    "operator": "Amazon Web Services",
+    "address": "Smith Switch Road"
+  },
+  {
+    "name": "Amazon IAD-61",
+    "lat": 38.9158051,
+    "lng": -77.4919869,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon IAD51",
+    "lat": 38.9914123,
+    "lng": -77.4365107,
+    "operator": "Amazon Web Services",
+    "address": "Pacific Boulevard"
+  },
+  {
+    "name": "Amazon IAD14",
+    "lat": 38.7898846,
+    "lng": -77.5482287,
+    "operator": "Amazon Web Services",
+    "address": "Brewers Spring Road"
+  },
+  {
+    "name": "Amazon PDX2",
+    "lat": 45.916359,
+    "lng": -119.2677512,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon Web Services us-west-2",
+    "lat": 45.8410032,
+    "lng": -119.6527688,
+    "operator": "Amazon Web Services",
+    "address": "Lewis and Clark Drive"
+  },
+  {
+    "name": "Csquare SFO1",
+    "lat": 37.37045,
+    "lng": -121.9698252,
+    "operator": "Csquare",
+    "address": "Walsh Avenue",
+    "website": "https://www.csquare.com/data-centers/silicon-valley#santaclara-sfo1"
+  },
+  {
+    "name": "Centurylink",
+    "lat": 34.1998691,
+    "lng": -118.3437888,
+    "operator": "Centurylink"
+  },
+  {
+    "name": "Lumen Dallas - 3180 Irving Blvd.",
+    "lat": 32.8069549,
+    "lng": -96.8685888,
+    "operator": "Lumen Technologies",
+    "address": "Irving Boulevard"
+  },
+  {
+    "name": "Lumen Dallas 6",
+    "lat": 32.827998,
+    "lng": -96.8843787,
+    "operator": "Lumen Technologies",
+    "address": "Regal Row"
+  },
+  {
+    "name": "Verizon",
+    "lat": 39.589248,
+    "lng": -104.877933,
+    "operator": "Verizon"
+  },
+  {
+    "name": "Flexential Portland - Hillsboro 2",
+    "lat": 45.558302,
+    "lng": -122.9171647,
+    "operator": "Flexential",
+    "address": "Northeast Huffman Street",
+    "website": "https://www.flexential.com/data-centers/or/portland/hillsboro2-data-center"
+  },
+  {
+    "name": "DXC Technology",
+    "lat": 30.0187,
+    "lng": -95.8637474,
+    "operator": "DXC Technology"
+  },
+  {
+    "name": "Amazon IAD73",
+    "lat": 38.7779795,
+    "lng": -77.5590992,
+    "operator": "Amazon Web Services",
+    "address": "Wellington Road"
+  },
+  {
+    "name": "H5 Data Center",
+    "lat": 41.5063555,
+    "lng": -81.683589,
+    "address": "Rockwell Avenue",
+    "website": "https://h5datacenters.com/cleveland-data-center.html"
+  },
+  {
+    "name": "CyrusOne San Antonio I",
+    "lat": 29.4666098,
+    "lng": -98.6880869,
+    "operator": "CyrusOne",
+    "address": "Westover Hills Boulevard",
+    "website": "https://cyrusone.com/data-center-locations/texas/san-antonio-texas/"
+  },
+  {
+    "name": "CenturyLink",
+    "lat": 33.7651394,
+    "lng": -84.3837393
+  },
+  {
+    "name": "DXC Technology",
+    "lat": 29.9951976,
+    "lng": -95.5633335,
+    "operator": "DXC Technology"
+  },
+  {
+    "name": "Facebook Altoona Data Center 3",
+    "lat": 41.6670521,
+    "lng": -93.5065646,
+    "operator": "Meta"
+  },
+  {
+    "name": "Digital Realty Northern Virginia IAD36",
+    "lat": 39.0015493,
+    "lng": -77.4793749,
+    "operator": "Digital Realty",
+    "address": "Digital Loudoun Plaza",
+    "website": "https://www.digitalrealty.com/data-centers/americas/northern-virginia/iad36"
+  },
+  {
+    "name": "Verizon Wireless",
+    "lat": 41.2204018,
+    "lng": -96.1476408,
+    "operator": "Verizon Wireless",
+    "address": "South 149th Circle"
+  },
+  {
+    "name": "Meta",
+    "lat": 40.0684176,
+    "lng": -82.7503131,
+    "operator": "Meta"
+  },
+  {
+    "name": "Amazon IAD120",
+    "lat": 38.9579165,
+    "lng": -77.4980579,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon IAD58",
+    "lat": 38.9863003,
+    "lng": -77.4418855,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "QTS Ashburn 1",
+    "lat": 38.9995277,
+    "lng": -77.4501109,
+    "operator": "Quality Technology Services",
+    "address": "Broderick Drive",
+    "website": "https://www.qtsdatacenters.com/data-centers/ashburn-broderick"
+  },
+  {
+    "name": "Amazon IAD90",
+    "lat": 38.9886031,
+    "lng": -77.4116516,
+    "operator": "Amazon Web Services",
+    "address": "Pathfinder Plaza"
+  },
+  {
+    "name": "Amazon IAD114",
+    "lat": 39.035494,
+    "lng": -77.4506986,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon IAD150",
+    "lat": 38.9160727,
+    "lng": -77.4772491,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Flexential Salt Lake City - Downtown",
+    "lat": 40.7563065,
+    "lng": -111.9548375,
+    "operator": "Flexential",
+    "address": "South Delong Street",
+    "website": "https://www.flexential.com/data-centers/ut/salt-lake-city/downtown-data-center"
+  },
+  {
+    "name": "Digital Realty PDX11 Data Center",
+    "lat": 45.5679542,
+    "lng": -122.9167725,
+    "operator": "Digital Realty",
+    "address": "Northeast 62nd Avenue"
+  },
+  {
+    "name": "Involta",
+    "lat": 44.2044349,
+    "lng": -88.3449304,
+    "operator": "Involta"
+  },
+  {
+    "name": "US Signal",
+    "lat": 42.2353267,
+    "lng": -83.4441406,
+    "operator": "US Signal"
+  },
+  {
+    "name": "Amazon IAD118",
+    "lat": 39.0185086,
+    "lng": -77.4388362,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "TierPoint",
+    "lat": 35.9245097,
+    "lng": -86.8556872,
+    "website": "https://www.tierpoint.com/data-centers/tennessee/nashville/"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 40.1025733,
+    "lng": -83.1996982,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Microsoft",
+    "lat": 41.5167412,
+    "lng": -93.7025134,
+    "operator": "Microsoft"
+  },
+  {
+    "name": "Facebook Altoona Data Center 5",
+    "lat": 41.6711866,
+    "lng": -93.5165942,
+    "operator": "Meta"
+  },
+  {
+    "name": "Blockfusion",
+    "lat": 43.074831,
+    "lng": -78.944809,
+    "operator": "Blockfusion",
+    "address": "Frontier Avenue"
+  },
+  {
+    "name": "Lumen",
+    "lat": 37.062799,
+    "lng": -113.5447485,
+    "operator": "Lumen Technologies"
+  },
+  {
+    "name": "CoreSite Chicago Data Center (CH2)",
+    "lat": 41.8627972,
+    "lng": -87.6413012,
+    "operator": "CoreSite",
+    "address": "South Clinton Street",
+    "website": "https://www.coresite.com/data-center/ch2-chicago-il"
+  },
+  {
+    "name": "DirecTV",
+    "lat": 32.0927065,
+    "lng": -110.7874236,
+    "operator": "DirecTV",
+    "address": "East Old Vail Road"
+  },
+  {
+    "name": "Google",
+    "lat": 36.0562713,
+    "lng": -115.0085752,
+    "operator": "Google",
+    "address": "West Warm Springs Road"
+  },
+  {
+    "name": "Google",
+    "lat": 32.4421391,
+    "lng": -97.0624648,
+    "operator": "Google"
+  },
+  {
+    "name": "Google",
+    "lat": 41.134992,
+    "lng": -96.1467112,
+    "operator": "Google"
+  },
+  {
+    "name": "Flexential Portland - Hillsboro 4",
+    "lat": 45.5553133,
+    "lng": -122.9401317,
+    "operator": "Flexential",
+    "address": "Northeast Starr Boulevard",
+    "website": "https://www.flexential.com/data-centers/portland-hillsboro-5-data-center"
+  },
+  {
+    "name": "TierPoint",
+    "lat": 38.9406295,
+    "lng": -94.7552326,
+    "operator": "TierPoint"
+  },
+  {
+    "name": "Microsoft",
+    "lat": 39.0747869,
+    "lng": -77.564129,
+    "operator": "Microsoft",
+    "address": "Compass Creek Parkway"
+  },
+  {
+    "name": "Quicken Loans",
+    "lat": 42.3261779,
+    "lng": -83.0697687,
+    "operator": "Quicken Loans",
+    "address": "Rosa Parks Boulevard"
+  },
+  {
+    "name": "Amazon PDX91",
+    "lat": 45.8379238,
+    "lng": -119.6883543,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "QTS Data Center Bld 5",
+    "lat": 45.5588073,
+    "lng": -122.9351544,
+    "operator": "Quality Technology Services"
+  },
+  {
+    "name": "Amazon IAD163",
+    "lat": 39.0323054,
+    "lng": -77.4297021,
+    "operator": "Amazon Web Services",
+    "address": "Atlantic Boulevard"
+  },
+  {
+    "name": "Edgeconnex Data Center",
+    "lat": 38.5922987,
+    "lng": -121.27744,
+    "operator": "EdgeConneX",
+    "address": "Gold Center Drive",
+    "website": "https://www.edgeconnex.com/locations/americas/sacramento-ca/"
+  },
+  {
+    "name": "CenturyLink",
+    "lat": 44.9380753,
+    "lng": -123.0337222,
+    "operator": "CenturyLink",
+    "address": "State Street"
+  },
+  {
+    "name": "CyrusOne NVA7",
+    "lat": 39.0263152,
+    "lng": -77.4340194,
+    "operator": "CyrusOne",
+    "address": "Pacific Boulevard",
+    "website": "https://www.cyrusone.com/data-centers/north-america/virginia/nva7-sterling"
+  },
+  {
+    "name": "Switch Las Vegas 10",
+    "lat": 36.0555857,
+    "lng": -115.2230608
+  },
+  {
+    "name": "Iron Mountain VA-1",
+    "lat": 38.777963,
+    "lng": -77.5471012,
+    "operator": "Iron Mountain",
+    "website": "https://www.ironmountain.com/resources/solution-guides/d/data-centers-northern-virginia-va-1"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 38.7784509,
+    "lng": -77.539427,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon IAD102",
+    "lat": 38.7359728,
+    "lng": -77.5048957,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "CloudHQ MCC2",
+    "lat": 38.7231919,
+    "lng": -77.4989708,
+    "operator": "CloudHQ",
+    "website": "https://cloudhq.com/location/mcc-campus/"
+  },
+  {
+    "name": "Digital Realty IAD42",
+    "lat": 39.0056891,
+    "lng": -77.4494637,
+    "operator": "Digital Realty",
+    "address": "Broderick Drive"
+  },
+  {
+    "name": "DirecTV",
+    "lat": 31.9726748,
+    "lng": -110.3047517,
+    "operator": "DirecTV",
+    "address": "Direct Way"
+  },
+  {
+    "name": "Meta",
+    "lat": 33.5980717,
+    "lng": -83.6950212,
+    "operator": "Meta"
+  },
+  {
+    "name": "Google",
+    "lat": 41.1773457,
+    "lng": -95.8048567,
+    "operator": "Google"
+  },
+  {
+    "name": "PowerHouse",
+    "lat": 37.356296,
+    "lng": -77.3336573,
+    "operator": "PowerHouse"
+  },
+  {
+    "name": "Aligned IAD02",
+    "lat": 39.0104171,
+    "lng": -77.4751585,
+    "operator": "Aligned"
+  },
+  {
+    "name": "US Bitcoin",
+    "lat": 43.0821786,
+    "lng": -79.0307777,
+    "operator": "US Bitcoin"
+  },
+  {
+    "name": "Aligned Data Centers",
+    "lat": 45.5540594,
+    "lng": -122.9492507,
+    "operator": "Aligned Data Centers"
+  },
+  {
+    "name": "Flexential Salt Lake City - Fair Park",
+    "lat": 40.7667963,
+    "lng": -111.9202947,
+    "operator": "Flexential",
+    "address": "South 1000 West",
+    "website": "https://www.flexential.com/data-centers/ut/salt-lake-city/fair-park-data-center"
+  },
+  {
+    "name": "Amazon PDX63",
+    "lat": 45.9014505,
+    "lng": -119.3205224,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "AWS IAD105",
+    "lat": 38.7475999,
+    "lng": -77.51948,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "West Wisconsin Telcom",
+    "lat": 44.8771653,
+    "lng": -91.9199989,
+    "operator": "West Wisconsin Telcom",
+    "address": "6th Avenue"
+  },
+  {
+    "name": "Amazon IAD130",
+    "lat": 38.7603606,
+    "lng": -77.5193019,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "NTT Ashburn VA8 Data Centre",
+    "lat": 39.0201893,
+    "lng": -77.475509,
+    "operator": "NTT",
+    "address": "Gigabit Plaza"
+  },
+  {
+    "name": "Meta",
+    "lat": 34.8258798,
+    "lng": -106.7788934,
+    "operator": "Meta",
+    "address": "Messenger Loop NW"
+  },
+  {
+    "name": "Flexential Nashville - Cool Springs",
+    "lat": 35.951045,
+    "lng": -86.833406,
+    "operator": "Flexential",
+    "address": "Duke Drive",
+    "website": "https://www.flexential.com/data-centers/tn/nashville/cool-springs-data-center"
+  },
+  {
+    "name": "CenturyLink",
+    "lat": 32.3096657,
+    "lng": -106.7291929,
+    "operator": "CenturyLink"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 38.9043442,
+    "lng": -77.4524692,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 40.0934344,
+    "lng": -82.7321669,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 40.0493536,
+    "lng": -83.175465,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Google",
+    "lat": 38.7761446,
+    "lng": -77.5825144,
+    "operator": "Google"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 45.8587472,
+    "lng": -119.6050828,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 45.9206382,
+    "lng": -119.2318204,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Google",
+    "lat": 39.7240422,
+    "lng": -82.6911124,
+    "operator": "Google"
+  },
+  {
+    "name": "Meta Sarpy Data center",
+    "lat": 41.1235744,
+    "lng": -96.1328883,
+    "operator": "Meta"
+  },
+  {
+    "name": "Meta",
+    "lat": 41.6757843,
+    "lng": -93.5098305,
+    "operator": "Meta"
+  },
+  {
+    "name": "Switch",
+    "lat": 36.0640206,
+    "lng": -115.221109,
+    "operator": "Switch"
+  },
+  {
+    "name": "Amazon IAD214",
+    "lat": 38.9865317,
+    "lng": -77.4351775,
+    "operator": "Amazon Web Services",
+    "address": "Pacific Boulevard"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 38.8028836,
+    "lng": -77.6221217,
+    "operator": "Amazon Web Services",
+    "address": "John Marshall Highway"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 45.8825121,
+    "lng": -119.3416417,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Microsoft",
+    "lat": 33.4463027,
+    "lng": -112.3738867,
+    "operator": "Microsoft",
+    "address": "South Bullard Avenue"
+  },
+  {
+    "name": "Iron Mountain VA-6",
+    "lat": 38.7681429,
+    "lng": -77.5386481,
+    "operator": "Iron Mountain",
+    "address": "Sudley Manor Drive"
+  },
+  {
+    "name": "HEB",
+    "lat": 29.5801522,
+    "lng": -98.5413037,
+    "operator": "HEB",
+    "address": "Huebner Road"
+  },
+  {
+    "name": "Meta",
+    "lat": 41.8885461,
+    "lng": -88.7218341,
+    "operator": "Meta"
+  },
+  {
+    "name": "Meta Gallatin Data Center",
+    "lat": 36.4060645,
+    "lng": -86.3666284,
+    "operator": "Meta"
+  },
+  {
+    "name": "DataBank",
+    "lat": 45.1436925,
+    "lng": -93.3871189,
+    "address": "Oxbow Creek Drive North",
+    "website": "https://databank.com"
+  },
+  {
+    "name": "CenturyLink",
+    "lat": 39.7440482,
+    "lng": -93.997376
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 40.0164194,
+    "lng": -83.1258518,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 45.8187019,
+    "lng": -119.6362631,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 45.8096338,
+    "lng": -119.268611,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "Amazon Web Services",
+    "lat": 45.7996834,
+    "lng": -119.3584242,
+    "operator": "Amazon Web Services"
+  },
+  {
+    "name": "CYS42 Datacenter",
+    "lat": 41.1253822,
+    "lng": -104.9088889,
+    "operator": "Microsoft"
+  },
+  {
+    "name": "Oppidan",
+    "lat": 40.0526729,
+    "lng": -83.1274235,
+    "operator": "Oppidan"
+  },
+  {
+    "name": "Google",
+    "lat": 41.3391392,
+    "lng": -96.0846572,
+    "operator": "Google"
+  },
+  {
+    "name": "QTS NAL 2 DC2",
+    "lat": 40.053078,
+    "lng": -82.7566343,
+    "operator": "Quality Technology Services",
+    "address": "Beech Road Southwest"
+  },
+  {
+    "name": "QTS NAL1 DC1",
+    "lat": 40.0650012,
+    "lng": -82.7581306,
+    "operator": "Quality Technology Services",
+    "address": "Beech Road Southwest"
+  },
+  {
+    "name": "Google",
+    "lat": 32.5390042,
+    "lng": -96.7932072,
+    "operator": "Google"
+  },
+  {
+    "name": "PowerHouse CTP-02",
+    "lat": 37.360586,
+    "lng": -77.3256869,
+    "operator": "PowerHouse"
+  },
+  {
+    "name": "QTS",
+    "lat": 33.4484031,
+    "lng": -84.5224887,
+    "operator": "Quality Technology Services"
+  },
+  {
+    "name": "Verizon",
+    "lat": 40.8782456,
+    "lng": -78.7287879
+  },
+  {
+    "name": "Switch: The Rock",
+    "lat": 30.4880189,
+    "lng": -97.6725256,
+    "operator": "Switch"
+  },
+  {
+    "name": "DC6",
+    "lat": 37.4852894,
+    "lng": -77.2501822,
+    "operator": "Quality Technology Services",
+    "address": "Portugee Rd"
+  },
+  {
+    "name": "RIC2 DC1",
+    "lat": 37.4881735,
+    "lng": -77.2400618,
+    "address": "Technology Boulevard"
+  },
+  {
+    "name": "RIC2 DC6",
+    "lat": 37.4839006,
+    "lng": -77.2437642,
+    "address": "Technology Boulevard"
+  },
+  {
+    "name": "RIC3 DC1",
+    "lat": 37.4805039,
+    "lng": -77.2516217,
+    "operator": "Quality Technology Services",
+    "address": "Portugee Road"
+  },
+  {
+    "name": "SC",
+    "lat": 37.2784058,
+    "lng": -98.5884618,
+    "operator": "SC",
+    "address": "South Iliff Street"
+  },
+  {
+    "name": "Google Data Center",
+    "lat": 35.8951471,
+    "lng": -81.546278,
+    "operator": "Google"
+  },
+  {
+    "name": "Apple - Maiden Data Center",
+    "lat": 35.5887645,
+    "lng": -81.2623099
+  },
+  {
+    "name": "HPC",
+    "lat": 35.0499451,
+    "lng": -106.542801,
+    "operator": "Sandia National Laboratories"
+  },
+  {
+    "name": "Barclays Datacenter",
+    "lat": 40.6437889,
+    "lng": -74.2854476,
+    "operator": "Barclays"
+  },
+  {
+    "name": "CyberNAP Glen Burnie",
+    "lat": 39.1402303,
+    "lng": -76.6064303,
+    "operator": "AiNET"
+  },
+  {
+    "name": "Dakota Carrier Network",
+    "lat": 46.8151017,
+    "lng": -96.8443142
+  },
+  {
+    "name": "Equinix TR1",
+    "lat": 43.6445288,
+    "lng": -79.384389,
+    "operator": "Equinix",
+    "address": "Front Street West",
+    "website": "https://www.equinix.com/data-centers/americas-colocation/canada-colocation/toronto-data-centers/tr1"
+  },
+  {
+    "name": "VAN2",
+    "lat": 49.2869623,
+    "lng": -123.1194715,
+    "operator": "Cologix",
+    "address": "West Pender Street",
+    "website": "https://cologix.com/data-centers/vancouver/van2/"
+  },
+  {
+    "name": "Marysville Place",
+    "lat": 45.9782426,
+    "lng": -66.58879,
+    "address": "McGloin Street"
+  },
+  {
+    "name": "Colosseum Online Inc.",
+    "lat": 43.7794734,
+    "lng": -79.4895313,
+    "address": "Petrolia Road",
+    "website": "http://www.colosseum.com"
+  },
+  {
+    "name": "Vidéotron",
+    "lat": 45.5286229,
+    "lng": -73.6106463,
+    "operator": "Vidéotron",
+    "address": "Rue Saint-Dominique"
+  },
+  {
+    "name": "Equinix TR2",
+    "lat": 43.6509284,
+    "lng": -79.3617665,
+    "operator": "Equinix",
+    "address": "Parliament Street"
+  },
+  {
+    "name": "Vantage Data Centers Montreal I",
+    "lat": 45.486669,
+    "lng": -73.7561309,
+    "operator": "Vantage Data Centers",
+    "address": "Avenue Marie-Curie",
+    "website": "https://vantage-dc.com/data-center-locations/north-america/montreal-i-canada/"
+  },
+  {
+    "name": "Telus",
+    "lat": 49.1432073,
+    "lng": -102.9944945
+  },
+  {
+    "name": "Amazon",
+    "lat": 45.6236915,
+    "lng": -73.3813012,
+    "operator": "Amazon",
+    "address": "Boulevard Lionel-Boulet"
+  },
+  {
+    "name": "Vantage Montreal II",
+    "lat": 45.4746365,
+    "lng": -73.8000691,
+    "operator": "Vantage Data Centers",
+    "address": "Route Transcanadienne",
+    "website": "https://vantage-dc.com/data-center-locations/north-america/montreal-ii-canada/"
+  },
+  {
+    "name": "Centro de datos Triara",
+    "lat": 25.7842081,
+    "lng": -100.1795764,
+    "operator": "Triara"
+  },
+  {
+    "name": "Cologix",
+    "lat": 45.4807858,
+    "lng": -73.7697918,
+    "operator": "Cologix",
+    "address": "Rue Frédérick-Banting"
+  },
+  {
+    "name": "Centro de datos Equinix MO1",
+    "lat": 25.7666937,
+    "lng": -100.1933285,
+    "operator": "Equinix"
+  },
+  {
+    "name": "Centro de datos Equinix MO2",
+    "lat": 25.7241351,
+    "lng": -100.1327111,
+    "operator": "Equinix"
+  },
+  {
+    "name": "Centro de datos KIO MTY1",
+    "lat": 25.6492244,
+    "lng": -100.3585585,
+    "operator": "KIO"
+  },
+  {
+    "name": "Centro de datos KIO HER1",
+    "lat": 29.0855221,
+    "lng": -110.9607205,
+    "operator": "KIO"
+  },
+  {
+    "name": "OVHcloud, Centre de données de Beauharnois",
+    "lat": 45.3084542,
+    "lng": -73.8938795
+  },
+  {
+    "name": "Vantage Data Centers",
+    "lat": 46.7951442,
+    "lng": -71.3052093,
+    "operator": "Vantage Data Centers"
   }
 ]

@@ -4,12 +4,14 @@ Pipeline: config → search → fetch → filter → save → merge
 Source: Bing News RSS (direct URLs, no API key needed).
 """
 
+import math
 import re
 import json
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+from pathlib import Path
 from urllib.parse import quote_plus, parse_qs, urlparse, unquote
 
 import requests
@@ -17,24 +19,50 @@ import trafilatura
 
 # ── CONFIG ────────────────────────────────────────────────────────
 
-FACILITIES = {
-    "Greenidge": {
-        "search_names": ["greenidge", "greenidge generation"],
-        "merge_keywords": ["greenidge", "dresden"],
-    },
-    "Lake Mariner": {
-        "search_names": ["lake mariner", "terawulf lake mariner"],
-        "merge_keywords": ["lake mariner", "somerset", "terawulf"],
-    },
-    "H5 Datacenters": {
-        "search_names": ["h5 datacenters"],
-        "merge_keywords": ["h5 datacenters", "h5 data", "h5"],
-    },
-    "Blockfusion (Niagara Falls)": {
-        "search_names": ["blockfusion niagara falls", "niagara falls crypto mining"],
-        "merge_keywords": ["blockfusion", "niagara falls"],
-    },
-}
+# Generic topic terms; each center name (lowercased) is also a topic/merge string from FACILITIES.
+BASE_TOPIC_WORDS = [
+    "data center", "datacenter", "server farm", "computing facility",
+    "crypto", "cryptocurrency", "bitcoin", "mining", "mining facility",
+]
+
+
+def load_facilities_from_centers(centers_path=None) -> dict:
+    """One FACILITIES entry per center in centers.json: search + merge use the facility name only."""
+    path = Path(centers_path) if centers_path else Path(__file__).resolve().parent / "centers.json"
+    if not path.is_file():
+        raise FileNotFoundError(f"centers file not found: {path}")
+    with open(path, encoding="utf-8") as f:
+        centers = json.load(f)
+    out = {}
+    for c in centers:
+        name = (c.get("name") or "").strip()
+        if not name:
+            continue
+        key = name.lower()
+        out[name] = {
+            "search_names": [key],
+            "merge_keywords": [key],
+        }
+    return out
+
+
+FACILITIES = load_facilities_from_centers()
+
+
+def _compile_topic_re(facilities: dict):
+    words = list(BASE_TOPIC_WORDS)
+    for info in facilities.values():
+        for kw in info["merge_keywords"]:
+            if len(kw) >= 2:
+                words.append(kw)
+    uniq = []
+    seen = set()
+    for w in sorted(set(words), key=len, reverse=True):
+        if w not in seen:
+            seen.add(w)
+            uniq.append(w)
+    return re.compile(r"(" + "|".join(re.escape(w) for w in uniq) + r")", re.I)
+
 
 # EPA Noise Control Act + WHO Environmental Noise Guidelines
 IMPACT_TERMS = [
@@ -59,18 +87,18 @@ NOISE_WORDS = [
     "noise permit", "sound barrier", "sound wall",
 ]
 
-TOPIC_WORDS = [
-    "data center", "datacenter", "server farm", "computing facility",
-    "crypto", "cryptocurrency", "bitcoin", "mining", "mining facility",
-    "greenidge", "lake mariner", "somerset", "niagara", "terawulf",
-    "blockfusion", "h5 data",
-]
-
 NOISE_RE = re.compile(r"\b(" + "|".join(re.escape(w) for w in NOISE_WORDS) + r")\b", re.I)
-TOPIC_RE = re.compile(r"(" + "|".join(re.escape(w) for w in TOPIC_WORDS) + r")", re.I)
+TOPIC_RE = _compile_topic_re(FACILITIES)
 
 MAX_ARTICLES_PER_QUERY = 10
 MAX_WORKERS = 8
+
+
+def reload_facilities():
+    """Re-read centers.json into module globals (call after OSM update)."""
+    global FACILITIES, TOPIC_RE
+    FACILITIES = load_facilities_from_centers()
+    TOPIC_RE = _compile_topic_re(FACILITIES)
 
 # ── SEARCH ────────────────────────────────────────────────────────
 
@@ -155,7 +183,9 @@ def fetch_all(urls):
 
 # ── FILTER ────────────────────────────────────────────────────────
 
-def find_relevant_passages(text):
+def find_relevant_passages(text, title=""):
+    """Topic match uses article title + excerpt so headlines that name the site still qualify."""
+    title = (title or "").strip()
     sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
     passages, seen = [], set()
     for i, sent in enumerate(sentences):
@@ -166,7 +196,8 @@ def find_relevant_passages(text):
         block = re.sub(r"\s+", " ", " ".join(sentences[start:end])).strip()
         if len(block) < 30 or len(block) > 2000:
             continue
-        if not (NOISE_RE.search(block) and TOPIC_RE.search(block)):
+        topic_haystack = (title + " " + block).strip()
+        if not (NOISE_RE.search(block) and TOPIC_RE.search(topic_haystack)):
             continue
         key = block[:200]
         if key not in seen:
@@ -197,7 +228,7 @@ def run_scraper(save_path="scraped_testimonies.json"):
         text = texts.get(url, "")
         if not text:
             continue
-        for passage in find_relevant_passages(text):
+        for passage in find_relevant_passages(text, title=meta.get("title") or ""):
             key = passage[:200]
             if key in seen:
                 continue
@@ -210,6 +241,7 @@ def run_scraper(save_path="scraped_testimonies.json"):
                 "publisher": meta["publisher"] or "Unknown",
                 "article_title": meta["title"],
                 "search_keyword": meta["search_keyword"],
+                "facility_hint": meta.get("facility_hint"),
                 "search_source": "bing_news_rss",
                 "retrieved_at": datetime.now(timezone.utc).isoformat(),
             })
@@ -236,14 +268,34 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
         for c in centers
     }
 
+    def pick_facility_for_merge(text: str):
+        """Assign to the facility whose merge keyword is the longest substring match."""
+        text_l = text.lower()
+        best_name, best_len = None, 0
+        for name, info in FACILITIES.items():
+            for kw in info["merge_keywords"]:
+                if kw in text_l and len(kw) > best_len:
+                    best_len = len(kw)
+                    best_name = name
+        return best_name
+
     added = 0
     for t in scraped:
         stmt = re.sub(r"\s+", " ", re.sub(r"\bAdvertisement\b", "", t.get("statement", ""))).strip()
         if len(stmt) < 30:
             continue
-        text = (stmt + " " + t.get("source", "")).lower()
-        target = next((name for name, info in FACILITIES.items()
-                       if any(kw in text for kw in info["merge_keywords"])), None)
+        hint = (t.get("facility_hint") or "").strip()
+        if hint in name_to_idx:
+            target = hint
+        else:
+            text = (
+                stmt
+                + " "
+                + (t.get("source") or "")
+                + " "
+                + (t.get("article_title") or "")
+            )
+            target = pick_facility_for_merge(text)
         if not target or target not in name_to_idx:
             continue
         if any(stmt in ex or ex in stmt for ex in existing[target]):
@@ -259,6 +311,116 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
     print(f"[merge] Added {added} new testimonies into {centers_path}")
 
 
+# ── OSM UPDATE ───────────────────────────────────────────────────
+
+OVERPASS_URLS = [
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass-api.de/api/interpreter",
+]
+OVERPASS_QUERY = """
+[out:json][timeout:60];
+(
+  nwr["telecom"="data_center"](24.5,-125.0,49.5,-66.5);
+);
+out center;
+"""
+
+# ~0.5 km — close enough to be the same facility
+_DEDUP_KM = 0.5
+
+
+def _haversine_km(lat1, lon1, lat2, lon2):
+    R = 6371
+    dlat = math.radians(lat2 - lat1)
+    dlon = math.radians(lon2 - lon1)
+    a = math.sin(dlat / 2) ** 2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlon / 2) ** 2
+    return R * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+
+def _find_existing(center, existing_centers):
+    """Match by name+proximity or proximity alone."""
+    name = center["name"].lower()
+    for i, ec in enumerate(existing_centers):
+        ec_name = ec["name"].lower()
+        dist = _haversine_km(center["lat"], center["lng"], ec["lat"], ec["lng"])
+        # Same coords (< 0.5 km) → same facility
+        if dist < _DEDUP_KM:
+            return i
+        # Same name and within 5 km (accounts for minor coordinate drift)
+        if name and ec_name and name == ec_name and dist < 5:
+            return i
+    return None
+
+
+def update_centers_from_osm(centers_path="centers.json"):
+    """Fetch data centers from OpenStreetMap and merge new ones into centers.json."""
+    path = Path(centers_path)
+    if path.is_file():
+        with open(path, encoding="utf-8") as f:
+            centers = json.load(f)
+    else:
+        centers = []
+
+    print("[osm] Querying Overpass API for US data centers...")
+    elements = None
+    for url in OVERPASS_URLS:
+        try:
+            print(f"  [osm] Trying {url} ...")
+            resp = requests.post(url, data={"data": OVERPASS_QUERY}, timeout=180)
+            resp.raise_for_status()
+            elements = resp.json().get("elements", [])
+            break
+        except Exception as e:
+            print(f"  [osm] Failed: {e}")
+    if elements is None:
+        print("[osm] All Overpass servers failed, skipping OSM update")
+        return centers
+
+    print(f"[osm] Got {len(elements)} elements from OSM")
+
+    added = 0
+    for el in elements:
+        tags = el.get("tags", {})
+        lat = el.get("lat") or (el.get("center") or {}).get("lat")
+        lon = el.get("lon") or (el.get("center") or {}).get("lon")
+        name = (tags.get("name") or "").strip()
+        if not lat or not lon:
+            continue
+        if not name:
+            # Fall back to operator as name so the scraper has something to search
+            name = (tags.get("operator") or "").strip()
+        if not name:
+            continue
+
+        osm_center = {"name": name, "lat": lat, "lng": lon}
+
+        # Add optional OSM metadata
+        if tags.get("operator"):
+            osm_center["operator"] = tags["operator"]
+        if tags.get("addr:full") or tags.get("addr:street"):
+            osm_center["address"] = tags.get("addr:full") or tags.get("addr:street")
+        if tags.get("website") or tags.get("contact:website"):
+            osm_center["website"] = tags.get("website") or tags.get("contact:website")
+
+        idx = _find_existing(osm_center, centers)
+        if idx is not None:
+            # Update metadata on existing entry, but never overwrite testimonies or county
+            existing = centers[idx]
+            for key in ("operator", "address", "website"):
+                if osm_center.get(key) and not existing.get(key):
+                    existing[key] = osm_center[key]
+        else:
+            centers.append(osm_center)
+            added += 1
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(centers, f, indent=2, ensure_ascii=False)
+    print(f"[osm] {added} new centers added, {len(centers)} total in {centers_path}")
+    return centers
+
+
 if __name__ == "__main__":
+    update_centers_from_osm()
+    reload_facilities()
     run_scraper()
     merge_into_centers()
