@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useCentersFull } from '../hooks/useCenters'
 
 function escapeHtml(s) {
   if (s == null) return ''
@@ -56,11 +57,12 @@ function TestimonyCard({ t }) {
   )
 }
 
-export default function TestimoniesList({ centers }) {
+export default function TestimoniesList() {
   const location = useLocation()
   const initialFacility = location.state?.facilityFilter || ''
   const [query, setQuery] = useState('')
   const [facilityFilter, setFacilityFilter] = useState(initialFacility)
+  const { centers, loading, error } = useCentersFull()
 
   useEffect(() => {
     if (initialFacility) setFacilityFilter(initialFacility)
@@ -70,6 +72,13 @@ export default function TestimoniesList({ centers }) {
     () => getFilteredTestimonies(centers, query, facilityFilter),
     [centers, query, facilityFilter]
   )
+
+  if (loading) {
+    return <p style={{ color: 'var(--color-text-muted)' }}>Loading testimonies…</p>
+  }
+  if (error) {
+    return <p style={{ color: 'var(--color-text-muted)' }}>Could not load testimonies.</p>
+  }
   const countText =
     filtered.length === 0
       ? 'No testimonies match your filters.'

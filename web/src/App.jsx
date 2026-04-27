@@ -30,7 +30,7 @@ function MainContent() {
     <main className="main">
       <Routes>
         <Route path="/" element={<MapView centers={centers} />} />
-        <Route path="/testimonies" element={<TestimoniesList centers={centers} />} />
+        <Route path="/testimonies" element={<TestimoniesList />} />
         <Route
           path="/add"
           element={<AddTestimony centers={centers} onSuccess={reload} />}

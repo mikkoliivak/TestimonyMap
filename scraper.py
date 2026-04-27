@@ -1,6 +1,7 @@
 """Scrape data-center noise testimonies from Bing News RSS."""
 
 import math
+import os
 import re
 import json
 import xml.etree.ElementTree as ET
@@ -13,10 +14,39 @@ from urllib.parse import quote_plus, parse_qs, urlparse, unquote
 import requests
 import trafilatura
 
+
+def _atomic_write_json(path, data):
+    """Write JSON atomically: write to a tmp file then rename, so a crash mid-write
+    can't leave centers.json or scraped_testimonies.json half-written."""
+    path = Path(path)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    os.replace(tmp, path)
+
 BASE_TOPIC_WORDS = [
-    "data center", "datacenter", "server farm", "computing facility",
+    "data center", "data centre", "datacenter", "datacentre",
+    "server farm", "computing facility",
     "crypto", "cryptocurrency", "bitcoin", "mining", "mining facility",
 ]
+
+GENERIC_NAMES = {
+    "data center", "data centre", "datacenter", "datacentre",
+    "server farm", "computing facility", "data hall",
+    "dc", "facility", "telecom", "telecommunications",
+    "data center building", "datacenter building",
+}
+
+
+def _normalize_name(name: str) -> str:
+    return re.sub(r"\s+", " ", (name or "").strip().lower())
+
+
+def _is_generic_name(name: str) -> bool:
+    n = _normalize_name(name)
+    if not n:
+        return True
+    return n in GENERIC_NAMES
 
 
 def load_facilities_from_centers(centers_path=None) -> dict:
@@ -25,13 +55,18 @@ def load_facilities_from_centers(centers_path=None) -> dict:
     if not path.is_file():
         raise FileNotFoundError(f"centers file not found: {path}")
     with open(path, encoding="utf-8") as f:
-        centers = json.load(f)
+        raw = f.read().strip()
+    centers = json.loads(raw) if raw else []
     out = {}
     for c in centers:
         name = (c.get("name") or "").strip()
-        if not name:
+        if not name or _is_generic_name(name):
             continue
-        key = name.lower()
+        key = _normalize_name(name)
+        # If two centers share a name (rare, but possible), keep the first; both
+        # still live in centers.json — only one is used as a search target.
+        if name in out:
+            continue
         out[name] = {
             "search_names": [key],
             "merge_keywords": [key],
@@ -81,7 +116,7 @@ NOISE_WORDS = [
 NOISE_RE = re.compile(r"\b(" + "|".join(re.escape(w) for w in NOISE_WORDS) + r")\b", re.I)
 TOPIC_RE = _compile_topic_re(FACILITIES)
 
-MAX_ARTICLES_PER_QUERY = 10
+MAX_ARTICLES_PER_QUERY = 25
 MAX_WORKERS = 8
 
 
@@ -161,21 +196,34 @@ def fetch_and_extract(url):
 
 def fetch_all(urls):
     results = {}
+    urls = list(urls)
+    total = len(urls)
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         futures = {pool.submit(fetch_and_extract, u): u for u in urls}
+        done = 0
         for fut in as_completed(futures):
             url, text = fut.result()
             results[url] = text
+            done += 1
+            # Print on every 1% increment (or every article if there are few)
+            step = max(1, total // 100)
+            if done % step == 0 or done == total:
+                pct = (done / total) * 100 if total else 100
+                ok = sum(1 for t in results.values() if t)
+                print(f"  [fetch] {done}/{total} ({pct:.0f}%) — {ok} extracted")
     return results
 
 def find_relevant_passages(text, title=""):
-    """Topic match uses article title + excerpt so headlines that name the site still qualify."""
+    """Topic match uses article title + excerpt so headlines that name the site still qualify.
+    Returns list of (passage, matched_noise_word) tuples."""
     title = (title or "").strip()
     sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
     passages, seen = [], set()
     for i, sent in enumerate(sentences):
-        if not NOISE_RE.search(sent):
+        noise_match = NOISE_RE.search(sent)
+        if not noise_match:
             continue
+        noise_word = noise_match.group(0).lower()
         start = max(0, i - 1)
         end = min(len(sentences), i + 2)
         block = re.sub(r"\s+", " ", " ".join(sentences[start:end])).strip()
@@ -187,58 +235,83 @@ def find_relevant_passages(text, title=""):
         key = block[:200]
         if key not in seen:
             seen.add(key)
-            passages.append(block)
+            passages.append((block, noise_word))
     return passages
 
 def run_scraper(save_path="scraped_testimonies.json"):
     queries = generate_queries()
     print(f"Generated {len(queries)} queries ({len(FACILITIES)} facilities × {len(IMPACT_TERMS)} terms)\n")
 
+    # Run Bing News searches in parallel — each search is a network round-trip,
+    # so threading gives a ~MAX_WORKERS× speedup over the sequential loop.
     articles = {}
-    for query, facility in queries:
-        print(f"  searching: '{query}'")
-        for art in search_bing_news(query):
-            url = art["link"]
-            if url not in articles:
-                articles[url] = {**art, "search_keyword": query, "facility_hint": facility}
+    completed = 0
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
+        future_to_meta = {
+            pool.submit(search_bing_news, q): (q, facility) for q, facility in queries
+        }
+        for fut in as_completed(future_to_meta):
+            query, facility = future_to_meta[fut]
+            completed += 1
+            if completed % 50 == 0 or completed == len(queries):
+                print(f"  [search] {completed}/{len(queries)} queries done")
+            try:
+                results = fut.result()
+            except Exception as e:
+                print(f"  [skip] '{query}': {e}")
+                continue
+            for art in results:
+                url = art["link"]
+                if url not in articles:
+                    articles[url] = {**art, "search_keywords": [query], "facility_hints": [facility]}
+                else:
+                    if query not in articles[url]["search_keywords"]:
+                        articles[url]["search_keywords"].append(query)
+                    if facility not in articles[url]["facility_hints"]:
+                        articles[url]["facility_hints"].append(facility)
 
     print(f"\nFound {len(articles)} unique articles. Fetching...\n")
     texts = fetch_all(articles.keys())
     print(f"Fetched {sum(1 for t in texts.values() if t)}/{len(articles)} articles\n")
 
-    testimonies, seen = [], set()
+    # Article-centric output: one record per article, with sections as children
+    output, seen_passages = [], set()
     for url, meta in articles.items():
         text = texts.get(url, "")
         if not text:
             continue
-        for passage in find_relevant_passages(text, title=meta.get("title") or ""):
+        sections = []
+        for passage, noise_word in find_relevant_passages(text, title=meta.get("title") or ""):
             key = passage[:200]
-            if key in seen:
+            if key in seen_passages:
                 continue
-            seen.add(key)
-            testimonies.append({
-                "statement": passage,
-                "date": meta["date"] or "Unknown",
-                "source": url,
-                "source-details": meta["publisher"] or "Unknown",
-                "publisher": meta["publisher"] or "Unknown",
-                "article_title": meta["title"],
-                "search_keyword": meta["search_keyword"],
-                "facility_hint": meta.get("facility_hint"),
-                "search_source": "bing_news_rss",
-                "retrieved_at": datetime.now(timezone.utc).isoformat(),
-            })
+            seen_passages.add(key)
+            sections.append({"statement": passage, "matched_noise_word": noise_word})
+        if not sections:
+            continue
+        output.append({
+            "article_url": url,
+            "article_title": meta["title"],
+            "date": meta["date"] or "Unknown",
+            "publisher": meta["publisher"] or "Unknown",
+            "search_keywords": meta["search_keywords"],
+            "facility_hints": meta["facility_hints"],
+            "search_source": "bing_news_rss",
+            "retrieved_at": datetime.now(timezone.utc).isoformat(),
+            "sections": sections,
+        })
 
-    with open(save_path, "w", encoding="utf-8") as f:
-        json.dump(testimonies, f, indent=2, ensure_ascii=False)
-    print(f"Saved {len(testimonies)} testimonies to {save_path}")
-    return testimonies
+    _atomic_write_json(save_path, output)
+    total_sections = sum(len(a["sections"]) for a in output)
+    print(f"Saved {len(output)} articles ({total_sections} passages) to {save_path}")
+    return output
 
 
 def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testimonies.json"):
     try:
         with open(centers_path) as f:
-            centers = json.load(f)
+            raw = f.read().strip()
+        centers = json.loads(raw) if raw else []
         with open(scraped_path) as f:
             scraped = json.load(f)
     except FileNotFoundError as e:
@@ -288,32 +361,70 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
         return best_name, best_score
 
     added = 0
-    for t in scraped:
-        stmt = re.sub(r"\s+", " ", re.sub(r"\bAdvertisement\b", "", t.get("statement", ""))).strip()
-        if len(stmt) < 30:
-            continue
-        hint = (t.get("facility_hint") or "").strip()
-        title = (t.get("article_title") or "")
-        source = (t.get("source") or "")
-        target, score = pick_facility_for_merge(stmt, title, source)
-        if hint in name_to_idx:
-            hint_score = evidence_for_facility(hint, f"{title} {stmt}".lower())
-            if hint_score > 0:
-                target, score = hint, hint_score
-        if not target or target not in name_to_idx:
-            continue
-        if score < 6:
-            continue
-        if any(stmt in ex or ex in stmt for ex in existing[target]):
-            continue
-        t["statement"] = stmt
-        centers[name_to_idx[target]].setdefault("testimonies", []).append(t)
-        existing[target].add(stmt)
-        added += 1
+    for article in scraped:
+        # Support both new article-centric format and legacy flat format
+        if "sections" in article:
+            sections = article.get("sections", [])
+            title = article.get("article_title") or ""
+            source = article.get("article_url") or ""
+            date = article.get("date") or "Unknown"
+            publisher = article.get("publisher") or "Unknown"
+            hints = article.get("facility_hints") or []
+            search_keywords = article.get("search_keywords") or []
+            search_source = article.get("search_source", "bing_news_rss")
+            retrieved_at = article.get("retrieved_at")
+        else:
+            # Legacy flat format
+            sections = [{"statement": article.get("statement", ""), "matched_noise_word": article.get("matched_noise_word")}]
+            title = article.get("article_title") or ""
+            source = article.get("source") or ""
+            date = article.get("date") or "Unknown"
+            publisher = article.get("publisher") or "Unknown"
+            hints = [article.get("facility_hint") or ""]
+            search_keywords = [article.get("search_keyword") or ""]
+            search_source = article.get("search_source", "bing_news_rss")
+            retrieved_at = article.get("retrieved_at")
+
+        for section in sections:
+            stmt = re.sub(r"\s+", " ", re.sub(r"\bAdvertisement\b", "", section.get("statement", ""))).strip()
+            if len(stmt) < 30:
+                continue
+            target, score = pick_facility_for_merge(stmt, title, source)
+            for hint in hints:
+                hint = hint.strip()
+                if hint in name_to_idx:
+                    hint_score = evidence_for_facility(hint, f"{title} {stmt}".lower())
+                    if hint_score > 0:
+                        target, score = hint, hint_score
+                        break
+            if not target or target not in name_to_idx:
+                continue
+            # Threshold scales with the facility name length: a 3-char facility ("AWS")
+            # only needs the full 3-char word to match; longer names need ≥4 chars.
+            min_score = max(3, min(len(_normalize_name(target)), 4))
+            if score < min_score:
+                continue
+            if any(stmt in ex or ex in stmt for ex in existing[target]):
+                continue
+            record = {
+                "statement": stmt,
+                "date": date,
+                "source": source,
+                "source-details": publisher,
+                "publisher": publisher,
+                "article_title": title,
+                "search_keywords": search_keywords,
+                "matched_noise_word": section.get("matched_noise_word"),
+                "facility_hints": hints,
+                "search_source": search_source,
+                "retrieved_at": retrieved_at,
+            }
+            centers[name_to_idx[target]].setdefault("testimonies", []).append(record)
+            existing[target].add(stmt)
+            added += 1
 
     if added:
-        with open(centers_path, "w", encoding="utf-8") as f:
-            json.dump(centers, f, indent=2, ensure_ascii=False)
+        _atomic_write_json(centers_path, centers)
     print(f"[merge] Added {added} new testimonies into {centers_path}")
 
 
@@ -341,11 +452,19 @@ def _haversine_km(lat1, lon1, lat2, lon2):
 
 
 def _find_existing(center, existing_centers):
-    """Match by name+proximity or proximity alone."""
-    name = center["name"].lower()
+    """Match by OSM ID first, then fall back to normalized-name + proximity."""
+    osm_id = center.get("osm_id")
+    if osm_id is not None:
+        for i, ec in enumerate(existing_centers):
+            if ec.get("osm_id") == osm_id:
+                return i
+    name = _normalize_name(center.get("name", ""))
     for i, ec in enumerate(existing_centers):
-        ec_name = ec["name"].lower()
-        dist = _haversine_km(center["lat"], center["lng"], ec["lat"], ec["lng"])
+        ec_name = _normalize_name(ec.get("name", ""))
+        try:
+            dist = _haversine_km(center["lat"], center["lng"], ec["lat"], ec["lng"])
+        except (TypeError, KeyError):
+            continue
         if dist < _DEDUP_KM:
             return i
         if name and ec_name and name == ec_name and dist < 5:
@@ -358,7 +477,8 @@ def update_centers_from_osm(centers_path="centers.json"):
     path = Path(centers_path)
     if path.is_file():
         with open(path, encoding="utf-8") as f:
-            centers = json.load(f)
+            raw = f.read().strip()
+        centers = json.loads(raw) if raw else []
     else:
         centers = []
 
@@ -380,22 +500,41 @@ def update_centers_from_osm(centers_path="centers.json"):
     print(f"[osm] Got {len(elements)} elements from OSM")
 
     added = 0
+    skipped_generic = 0
     for el in elements:
         tags = el.get("tags", {})
         lat = el.get("lat") or (el.get("center") or {}).get("lat")
         lon = el.get("lon") or (el.get("center") or {}).get("lon")
-        name = (tags.get("name") or "").strip()
         if not lat or not lon:
             continue
-        if not name:
-            name = (tags.get("operator") or "").strip()
-        if not name:
+
+        raw_name = (tags.get("name") or "").strip()
+        operator = (tags.get("operator") or "").strip()
+        city = (tags.get("addr:city") or "").strip()
+
+        # Choose the most specific name available.
+        if raw_name and not _is_generic_name(raw_name):
+            name = raw_name
+        elif operator and not _is_generic_name(operator):
+            # Synthesize a useful name from operator (+ city for disambiguation)
+            name = f"{operator} data center" + (f" ({city})" if city else "")
+        else:
+            skipped_generic += 1
             continue
 
-        osm_center = {"name": name, "lat": lat, "lng": lon}
+        # Composite OSM identifier prevents collisions across node/way/relation namespaces.
+        osm_type = el.get("type") or "node"
+        osm_center = {
+            "name": name,
+            "lat": lat,
+            "lng": lon,
+            "osm_id": f"{osm_type}/{el.get('id')}",
+        }
 
-        if tags.get("operator"):
-            osm_center["operator"] = tags["operator"]
+        if operator:
+            osm_center["operator"] = operator
+        if city:
+            osm_center["city"] = city
         if tags.get("addr:full") or tags.get("addr:street"):
             osm_center["address"] = tags.get("addr:full") or tags.get("addr:street")
         if tags.get("website") or tags.get("contact:website"):
@@ -404,16 +543,26 @@ def update_centers_from_osm(centers_path="centers.json"):
         idx = _find_existing(osm_center, centers)
         if idx is not None:
             existing = centers[idx]
-            for key in ("operator", "address", "website"):
+            for key in ("operator", "address", "website", "osm_id", "city"):
                 if osm_center.get(key) and not existing.get(key):
                     existing[key] = osm_center[key]
+            # If the existing entry still has a generic name and we now have a real one, upgrade it.
+            if _is_generic_name(existing.get("name", "")) and not _is_generic_name(name):
+                existing["name"] = name
         else:
             centers.append(osm_center)
             added += 1
 
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(centers, f, indent=2, ensure_ascii=False)
-    print(f"[osm] {added} new centers added, {len(centers)} total in {centers_path}")
+    # Clean up any pre-existing entries whose name is generic (legacy data).
+    before = len(centers)
+    centers = [c for c in centers if not _is_generic_name(c.get("name", ""))]
+    cleaned = before - len(centers)
+
+    _atomic_write_json(path, centers)
+    print(
+        f"[osm] {added} new, {skipped_generic} skipped (generic name), "
+        f"{cleaned} legacy generic entries removed, {len(centers)} total in {centers_path}"
+    )
     return centers
 
 

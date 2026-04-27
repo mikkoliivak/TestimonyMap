@@ -20,6 +20,9 @@ export default function Header() {
           <NavLink to="/add" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             Add testimony
           </NavLink>
+          <a href="/api/export/csv" download="testimonies.csv" className="nav-link">
+            Download CSV
+          </a>
         </nav>
       </div>
     </header>

@@ -6,13 +6,16 @@ import L from 'leaflet'
 function CenterMarkers({ centers, onViewTestimonies }) {
   if (!centers?.length) return null
   return centers.map((c) => {
-    const count = (c.testimonies || []).length
+    // Summary endpoint returns `testimony_count`; fall back to in-line list length
+    // for backwards compatibility if a caller still passes the heavy payload.
+    const count = c.testimony_count ?? (c.testimonies || []).length
+    const place = c.county ? `${c.county} County` : c.city || ''
     return (
       <Marker key={c.name} position={[c.lat, c.lng]}>
         <Popup>
           <div className="popup-title">{c.name}</div>
           <div className="popup-meta">
-            {c.county || ''} County · {count} testimonies
+            {place ? `${place} · ` : ''}{count} testimonies
           </div>
           <a
             href="#"
