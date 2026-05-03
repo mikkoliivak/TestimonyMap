@@ -14,20 +14,19 @@ function getFilteredTestimonies(centers, query, facilityFilter) {
   const list = []
   centers.forEach((c) => {
     if (facilityFilter && c.name !== facilityFilter) return
-    ;(c.testimonies || []).forEach((t) => {
-      const text = (t.testimonies || t.statement || '').toLowerCase()
-      const sourceDetails = (t['source-details'] || '').toLowerCase()
-      const sourceUrl = (t.source || '').toLowerCase()
+    ;(c.articles || []).forEach((a) => {
+      const text = (a.testimonies || []).join(' ').toLowerCase()
+      const sourceDetails = (a['source-details'] || '').toLowerCase()
+      const sourceUrl = (a.source || '').toLowerCase()
       if (q && !text.includes(q) && !sourceDetails.includes(q) && !sourceUrl.includes(q)) return
       list.push({
         facility: c.name,
         county: c.county,
-        submitted: t.submitted,
-        testimonies: t.testimonies || t.statement || '',
-        date: t.date,
-        source: t.source,
-        'source-details': t['source-details'],
-        article_title: t.article_title,
+        testimonies: a.testimonies || [],
+        date: a.date,
+        source: a.source,
+        'source-details': a['source-details'],
+        article_title: a.article_title,
       })
     })
   })
@@ -40,7 +39,7 @@ function TestimonyCard({ t }) {
       ? `<a href="${t.source.replace(/"/g, '&quot;')}" target="_blank" rel="noopener">${escapeHtml(t['source-details'])}</a>`
       : escapeHtml(t['source-details'])
     : ''
-  const statements = (t.testimonies || '').split('&&').map((s) => s.trim()).filter(Boolean)
+  const statements = Array.isArray(t.testimonies) ? t.testimonies : []
   return (
     <article className={`testimony-card ${t.submitted ? 'submitted' : ''}`}>
       {t.article_title && <p className="testimony-article-title">{t.article_title}</p>}
@@ -125,7 +124,7 @@ export default function TestimoniesList() {
       <p className="result-count">{countText}</p>
       <div className="testimonies-list">
         {filtered.map((t, i) => (
-          <TestimonyCard key={`${t.facility}-${t.testimonies?.slice(0, 30)}-${i}`} t={t} />
+          <TestimonyCard key={`${t.facility}-${t.testimonies?.[0]?.slice(0, 30)}-${i}`} t={t} />
         ))}
       </div>
     </section>

@@ -319,15 +319,13 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
         return
 
     name_to_idx = {c["name"]: i for i, c in enumerate(centers)}
-    # existing tracks individual statements (split on &&) for dedup
     existing = {}
     for c in centers:
         stmts = set()
-        for t in c.get("testimonies", []):
-            for s in (t.get("testimonies") or t.get("statement") or "").split("&&"):
-                s = s.strip()
+        for a in c.get("articles", []):
+            for s in a.get("testimonies", []):
                 if s:
-                    stmts.add(s)
+                    stmts.add(s.strip())
         existing[c["name"]] = stmts
 
     def _kw_pattern(kw: str):
@@ -418,25 +416,22 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
             if not any(stmt in s or s in stmt for s in article_stmts[target]):
                 article_stmts[target].append(stmt)
 
-        # Store one record per article per facility, joining statements with &&
+        # Store one record per article per facility, with testimonies as a list
         for target, stmts in article_stmts.items():
-            combined = " && ".join(stmts)
-            # Check if an existing article record for this source already exists
-            existing_articles = centers[name_to_idx[target]].setdefault("testimonies", [])
+            existing_articles = centers[name_to_idx[target]].setdefault("articles", [])
             article_record = next(
                 (r for r in existing_articles if r.get("source") == source and r.get("article_title") == title),
                 None,
             )
             if article_record:
-                # Append new statements to existing article record
-                existing_stmts = [s.strip() for s in article_record["testimonies"].split("&&")]
+                existing_stmts = article_record.get("testimonies", [])
                 new_stmts = [s for s in stmts if not any(s in ex or ex in s for ex in existing_stmts)]
                 if new_stmts:
-                    article_record["testimonies"] = " && ".join(existing_stmts + new_stmts)
+                    article_record["testimonies"] = existing_stmts + new_stmts
                     added += len(new_stmts)
             else:
                 record = {
-                    "testimonies": combined,
+                    "testimonies": stmts,
                     "date": date,
                     "source": source,
                     "source-details": publisher,
