@@ -10,7 +10,7 @@ from flask_cors import CORS
 
 APP_DIR = Path(__file__).resolve().parent
 CENTERS_PATH = APP_DIR / "centers.json"
-USER_TESTIMONIES_PATH = APP_DIR / "user_testimonies.json"
+USER_TESTIMONIES_PATH = Path(os.environ.get("USER_TESTIMONIES_PATH", str(APP_DIR / "user_testimonies.json")))
 STATIC_DIR = APP_DIR / "web" / "dist"
 
 app = Flask(__name__, static_folder=str(STATIC_DIR), static_url_path="")
@@ -46,15 +46,17 @@ def merge_centers_with_user_testimonies(centers, user_list):
         if not facility or facility not in name_to_idx:
             continue
         idx = name_to_idx[facility]
-        testimony = {
-            "statement": (item.get("statement") or "").strip(),
+        stmt = (item.get("statement") or "").strip()
+        if not stmt:
+            continue
+        article = {
+            "testimonies": [stmt],
             "date": (item.get("date") or "Unknown").strip() or "Unknown",
             "source": (item.get("source") or "").strip() or "",
             "source-details": (item.get("source-details") or "Community submission").strip(),
             "submitted": True,
         }
-        if testimony["statement"]:
-            centers[idx].setdefault("testimonies", []).append(testimony)
+        centers[idx].setdefault("articles", []).append(article)
     return centers
 
 
@@ -98,7 +100,7 @@ def api_centers_summary():
             "lng": c.get("lng"),
             "operator": c.get("operator"),
             "city": c.get("city"),
-            "testimony_count": len(c.get("testimonies", [])),
+            "testimony_count": sum(len(a.get("testimonies", [])) for a in c.get("articles", [])),
         })
     return jsonify(summary)
 
@@ -157,20 +159,21 @@ def api_export_csv():
             center.get("address", ""),
             center.get("osm_id", ""),
         ]
-        for t in center.get("testimonies", []):
-            search_keywords = t.get("search_keywords") or ([t.get("search_keyword")] if t.get("search_keyword") else [])
-            facility_hints = t.get("facility_hints") or ([t.get("facility_hint")] if t.get("facility_hint") else [])
-            writer.writerow(base + [
-                t.get("statement", ""),
-                t.get("date", ""),
-                t.get("source", ""),
-                t.get("publisher", t.get("source-details", "")),
-                t.get("article_title", ""),
-                "; ".join(search_keywords),
-                t.get("matched_noise_word", ""),
-                "; ".join(facility_hints),
-                "yes" if t.get("submitted") else "no",
-            ])
+        for a in center.get("articles", []):
+            search_keywords = a.get("search_keywords") or []
+            facility_hints = a.get("facility_hints") or []
+            for stmt in a.get("testimonies", []):
+                writer.writerow(base + [
+                    stmt,
+                    a.get("date", ""),
+                    a.get("source", ""),
+                    a.get("publisher", a.get("source-details", "")),
+                    a.get("article_title", ""),
+                    "; ".join(search_keywords),
+                    "",
+                    "; ".join(facility_hints),
+                    "yes" if a.get("submitted") else "no",
+                ])
 
     buf.seek(0)
     return Response(
