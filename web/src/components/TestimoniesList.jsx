@@ -15,7 +15,7 @@ function getFilteredTestimonies(centers, query, facilityFilter) {
   centers.forEach((c) => {
     if (facilityFilter && c.name !== facilityFilter) return
     ;(c.testimonies || []).forEach((t) => {
-      const text = (t.statement || '').toLowerCase()
+      const text = (t.testimonies || t.statement || '').toLowerCase()
       const sourceDetails = (t['source-details'] || '').toLowerCase()
       const sourceUrl = (t.source || '').toLowerCase()
       if (q && !text.includes(q) && !sourceDetails.includes(q) && !sourceUrl.includes(q)) return
@@ -23,10 +23,11 @@ function getFilteredTestimonies(centers, query, facilityFilter) {
         facility: c.name,
         county: c.county,
         submitted: t.submitted,
-        statement: t.statement,
+        testimonies: t.testimonies || t.statement || '',
         date: t.date,
         source: t.source,
         'source-details': t['source-details'],
+        article_title: t.article_title,
       })
     })
   })
@@ -39,9 +40,13 @@ function TestimonyCard({ t }) {
       ? `<a href="${t.source.replace(/"/g, '&quot;')}" target="_blank" rel="noopener">${escapeHtml(t['source-details'])}</a>`
       : escapeHtml(t['source-details'])
     : ''
+  const statements = (t.testimonies || '').split('&&').map((s) => s.trim()).filter(Boolean)
   return (
     <article className={`testimony-card ${t.submitted ? 'submitted' : ''}`}>
-      <p className="testimony-statement">{t.statement}</p>
+      {t.article_title && <p className="testimony-article-title">{t.article_title}</p>}
+      {statements.map((s, i) => (
+        <p key={i} className="testimony-statement">{s}</p>
+      ))}
       <div className="testimony-meta">
         <span>
           <strong>{t.facility}</strong>
@@ -120,7 +125,7 @@ export default function TestimoniesList() {
       <p className="result-count">{countText}</p>
       <div className="testimonies-list">
         {filtered.map((t, i) => (
-          <TestimonyCard key={`${t.facility}-${t.statement?.slice(0, 30)}-${i}`} t={t} />
+          <TestimonyCard key={`${t.facility}-${t.testimonies?.slice(0, 30)}-${i}`} t={t} />
         ))}
       </div>
     </section>

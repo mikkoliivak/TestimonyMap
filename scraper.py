@@ -319,10 +319,16 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
         return
 
     name_to_idx = {c["name"]: i for i, c in enumerate(centers)}
-    existing = {
-        c["name"]: {t["statement"].strip() for t in c.get("testimonies", []) if t.get("statement")}
-        for c in centers
-    }
+    # existing tracks individual statements (split on &&) for dedup
+    existing = {}
+    for c in centers:
+        stmts = set()
+        for t in c.get("testimonies", []):
+            for s in (t.get("testimonies") or t.get("statement") or "").split("&&"):
+                s = s.strip()
+                if s:
+                    stmts.add(s)
+        existing[c["name"]] = stmts
 
     def _kw_pattern(kw: str):
         parts = [re.escape(p) for p in kw.split() if p]
@@ -385,6 +391,8 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
             search_source = article.get("search_source", "bing_news_rss")
             retrieved_at = article.get("retrieved_at")
 
+        # Collect valid new statements for this article grouped by target facility
+        article_stmts: dict[str, list[str]] = {}
         for section in sections:
             stmt = re.sub(r"\s+", " ", re.sub(r"\bAdvertisement\b", "", section.get("statement", ""))).strip()
             if len(stmt) < 30:
@@ -406,22 +414,43 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
                 continue
             if any(stmt in ex or ex in stmt for ex in existing[target]):
                 continue
-            record = {
-                "statement": stmt,
-                "date": date,
-                "source": source,
-                "source-details": publisher,
-                "publisher": publisher,
-                "article_title": title,
-                "search_keywords": search_keywords,
-                "matched_noise_word": section.get("matched_noise_word"),
-                "facility_hints": hints,
-                "search_source": search_source,
-                "retrieved_at": retrieved_at,
-            }
-            centers[name_to_idx[target]].setdefault("testimonies", []).append(record)
-            existing[target].add(stmt)
-            added += 1
+            article_stmts.setdefault(target, [])
+            if not any(stmt in s or s in stmt for s in article_stmts[target]):
+                article_stmts[target].append(stmt)
+
+        # Store one record per article per facility, joining statements with &&
+        for target, stmts in article_stmts.items():
+            combined = " && ".join(stmts)
+            # Check if an existing article record for this source already exists
+            existing_articles = centers[name_to_idx[target]].setdefault("testimonies", [])
+            article_record = next(
+                (r for r in existing_articles if r.get("source") == source and r.get("article_title") == title),
+                None,
+            )
+            if article_record:
+                # Append new statements to existing article record
+                existing_stmts = [s.strip() for s in article_record["testimonies"].split("&&")]
+                new_stmts = [s for s in stmts if not any(s in ex or ex in s for ex in existing_stmts)]
+                if new_stmts:
+                    article_record["testimonies"] = " && ".join(existing_stmts + new_stmts)
+                    added += len(new_stmts)
+            else:
+                record = {
+                    "testimonies": combined,
+                    "date": date,
+                    "source": source,
+                    "source-details": publisher,
+                    "publisher": publisher,
+                    "article_title": title,
+                    "search_keywords": search_keywords,
+                    "facility_hints": hints,
+                    "search_source": search_source,
+                    "retrieved_at": retrieved_at,
+                }
+                existing_articles.append(record)
+                added += len(stmts)
+            for stmt in stmts:
+                existing[target].add(stmt)
 
     if added:
         _atomic_write_json(centers_path, centers)
