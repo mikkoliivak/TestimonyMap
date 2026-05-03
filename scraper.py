@@ -67,9 +67,17 @@ def load_facilities_from_centers(centers_path=None) -> dict:
         # still live in centers.json — only one is used as a search target.
         if name in out:
             continue
+        _skip = {"data", "center", "power", "plant", "facility", "server", "cloud",
+                 "university", "health", "science", "storage", "systems", "network",
+                 "computing", "campus", "station", "building", "complex"}
+        sig_words = [w for w in key.split() if len(w) > 4 and w not in _skip]
+        # merge_keywords: full name + individual significant words for flexible matching
+        merge_kws = [key] + sig_words
+        # search_names: use significant words if they exist (more searchable than full long names)
+        search_names = sig_words[:1] if sig_words else [key]
         out[name] = {
-            "search_names": [key],
-            "merge_keywords": [key],
+            "search_names": search_names,
+            "merge_keywords": merge_kws,
         }
     return out
 
