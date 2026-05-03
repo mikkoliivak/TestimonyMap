@@ -21,7 +21,6 @@ user_testimonies.json
 
 # React (web/)
 web/node_modules/
-web/dist/
 
 # Root-level node modules (from docx generator script)
 node_modules/
