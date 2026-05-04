@@ -146,8 +146,8 @@ def generate_queries():
     return queries
 
 
-def search_bing_news(keyword, max_items=MAX_ARTICLES_PER_QUERY):
-    url = f"https://www.bing.com/news/search?q={quote_plus(keyword)}&format=rss"
+def search_google_news(keyword, max_items=MAX_ARTICLES_PER_QUERY):
+    url = f"https://news.google.com/rss/search?q={quote_plus(keyword)}&hl=en-US&gl=US&ceid=US:en"
     headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
     try:
         resp = requests.get(url, timeout=15, headers=headers)
@@ -157,19 +157,11 @@ def search_bing_news(keyword, max_items=MAX_ARTICLES_PER_QUERY):
         print(f"  [skip] '{keyword}': {e}")
         return []
 
-    ns_match = re.search(r'xmlns:News="([^"]+)"', resp.text)
-    ns = ns_match.group(1) if ns_match else None
-
     items = []
     for item in root.iter("item"):
         if len(items) >= max_items:
             break
-        raw_link = (item.findtext("link") or "").strip()
-        if "apiclick.aspx" in raw_link:
-            real = parse_qs(urlparse(raw_link).query).get("url", [""])[0]
-            link = unquote(real) if real else raw_link
-        else:
-            link = raw_link
+        link = (item.findtext("link") or "").strip()
         if not link.startswith("http"):
             continue
 
@@ -182,11 +174,7 @@ def search_bing_news(keyword, max_items=MAX_ARTICLES_PER_QUERY):
             except Exception:
                 date_str = pub_date
 
-        publisher = ""
-        if ns:
-            publisher = (item.findtext(f"{{{ns}}}Source") or "").strip()
-        if not publisher:
-            publisher = urlparse(link).netloc.replace("www.", "").split(".")[0].title()
+        publisher = urlparse(link).netloc.replace("www.", "").split(".")[0].title()
 
         items.append({"link": link, "title": title, "date": date_str, "publisher": publisher})
     return items
@@ -256,7 +244,7 @@ def run_scraper(save_path="scraped_testimonies.json"):
     completed = 0
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         future_to_meta = {
-            pool.submit(search_bing_news, q): (q, facility) for q, facility in queries
+            pool.submit(search_google_news, q): (q, facility) for q, facility in queries
         }
         for fut in as_completed(future_to_meta):
             query, facility = future_to_meta[fut]
@@ -304,7 +292,7 @@ def run_scraper(save_path="scraped_testimonies.json"):
             "publisher": meta["publisher"] or "Unknown",
             "search_keywords": meta["search_keywords"],
             "facility_hints": meta["facility_hints"],
-            "search_source": "bing_news_rss",
+            "search_source": "google_news_rss",
             "retrieved_at": datetime.now(timezone.utc).isoformat(),
             "sections": sections,
         })
@@ -383,7 +371,7 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
             publisher = article.get("publisher") or "Unknown"
             hints = article.get("facility_hints") or []
             search_keywords = article.get("search_keywords") or []
-            search_source = article.get("search_source", "bing_news_rss")
+            search_source = article.get("search_source", "google_news_rss")
             retrieved_at = article.get("retrieved_at")
         else:
             # Legacy flat format
@@ -394,7 +382,7 @@ def merge_into_centers(centers_path="centers.json", scraped_path="scraped_testim
             publisher = article.get("publisher") or "Unknown"
             hints = [article.get("facility_hint") or ""]
             search_keywords = [article.get("search_keyword") or ""]
-            search_source = article.get("search_source", "bing_news_rss")
+            search_source = article.get("search_source", "google_news_rss")
             retrieved_at = article.get("retrieved_at")
 
         # Collect valid new statements for this article grouped by target facility
