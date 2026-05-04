@@ -147,8 +147,8 @@ def api_export_csv():
     writer = csv.writer(buf)
     writer.writerow([
         "facility_name", "lat", "lng", "operator", "address", "osm_id",
-        "statement", "date", "source", "publisher", "article_title",
-        "search_keywords", "matched_noise_word", "facility_hints", "submitted",
+        "testimonies", "date", "source", "publisher", "article_title",
+        "search_keywords", "facility_hints", "submitted",
     ])
     for center in merged:
         base = [
@@ -162,18 +162,17 @@ def api_export_csv():
         for a in center.get("articles", []):
             search_keywords = a.get("search_keywords") or []
             facility_hints = a.get("facility_hints") or []
-            for stmt in a.get("testimonies", []):
-                writer.writerow(base + [
-                    stmt,
-                    a.get("date", ""),
-                    a.get("source", ""),
-                    a.get("publisher", a.get("source-details", "")),
-                    a.get("article_title", ""),
-                    "; ".join(search_keywords),
-                    "",
-                    "; ".join(facility_hints),
-                    "yes" if a.get("submitted") else "no",
-                ])
+            testimonies = a.get("testimonies") or []
+            writer.writerow(base + [
+                " && ".join(testimonies),
+                a.get("date", ""),
+                a.get("source", ""),
+                a.get("publisher", a.get("source-details", "")),
+                a.get("article_title", ""),
+                "; ".join(search_keywords),
+                "; ".join(facility_hints),
+                "yes" if a.get("submitted") else "no",
+            ])
 
     buf.seek(0)
     return Response(
