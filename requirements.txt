@@ -6,3 +6,5 @@ gunicorn>=21.2.0
 # Scraper
 requests>=2.31.0
 trafilatura>=2.0.0
+selenium>=4.0.0
+beautifulsoup4>=4.12.0

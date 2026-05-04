@@ -1,9 +1,10 @@
-"""Scrape data-center noise testimonies from Bing News RSS."""
+"""Scrape data-center noise testimonies from Yahoo News (Selenium)."""
 
 import math
 import os
 import re
 import json
+import time
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
@@ -13,6 +14,12 @@ from urllib.parse import quote_plus, parse_qs, urlparse, unquote
 
 import requests
 import trafilatura
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 def _atomic_write_json(path, data):
@@ -146,46 +153,77 @@ def generate_queries():
     return queries
 
 
-def search_google_news(keyword, max_items=MAX_ARTICLES_PER_QUERY):
-    url = f"https://news.google.com/rss/search?q={quote_plus(keyword)}&hl=en-US&gl=US&ceid=US:en"
-    headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
+_yahoo_driver = None
+
+def _get_driver():
+    global _yahoo_driver
+    if _yahoo_driver is not None:
+        return _yahoo_driver
+    opts = Options()
+    opts.add_argument("--headless=new")
+    opts.add_argument("--no-sandbox")
+    opts.add_argument("--disable-dev-shm-usage")
+    opts.add_argument("--disable-gpu")
+    opts.add_experimental_option("excludeSwitches", ["enable-automation"])
+    opts.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    driver = webdriver.Chrome(options=opts)
+    driver.set_page_load_timeout(20)
+    _yahoo_driver = driver
+    return driver
+
+def _resolve_yahoo_redirect(url):
     try:
-        resp = requests.get(url, timeout=15, headers=headers)
-        resp.raise_for_status()
-        root = ET.fromstring(resp.text)
+        if "r.search.yahoo.com" not in url:
+            return url
+        m = re.search(r"/RU=([^/]+)/", url)
+        if m:
+            return unquote(m.group(1))
+        qs = parse_qs(urlparse(url).query)
+        return unquote(qs["RU"][0]) if "RU" in qs else url
+    except Exception:
+        return url
+
+def search_yahoo_news(keyword, max_items=MAX_ARTICLES_PER_QUERY):
+    driver = _get_driver()
+    url = f"https://news.search.yahoo.com/search?p={quote_plus(keyword)}&ei=UTF-8"
+    try:
+        driver.get(url)
+        WebDriverWait(driver, 8).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "a[href]"))
+        )
+        time.sleep(1)
+        html = driver.page_source
     except Exception as e:
         print(f"  [skip] '{keyword}': {e}")
         return []
 
+    bs = BeautifulSoup(html, "html.parser")
     items = []
-    for item in root.iter("item"):
+    seen = set()
+    for a in bs.select("h4 a[href], h3 a[href]"):
         if len(items) >= max_items:
             break
-        link = (item.findtext("link") or "").strip()
-        if not link.startswith("http"):
+        href = _resolve_yahoo_redirect(a.get("href", "").strip())
+        if not href.startswith("http") or "search.yahoo.com" in href:
             continue
-
-        title = (item.findtext("title") or "").strip()
-        pub_date = (item.findtext("pubDate") or "").strip()
-        date_str = ""
-        if pub_date:
-            try:
-                date_str = parsedate_to_datetime(pub_date).strftime("%m-%d-%Y")
-            except Exception:
-                date_str = pub_date
-
-        publisher = urlparse(link).netloc.replace("www.", "").split(".")[0].title()
-
-        items.append({"link": link, "title": title, "date": date_str, "publisher": publisher})
+        if href in seen:
+            continue
+        seen.add(href)
+        title = a.get_text(" ", strip=True)
+        if len(title) < 8:
+            continue
+        publisher = urlparse(href).netloc.replace("www.", "").split(".")[0].title()
+        items.append({"link": href, "title": title, "date": "", "publisher": publisher})
     return items
+
 
 def fetch_and_extract(url):
     try:
         html = trafilatura.fetch_url(url)
         if not html:
-            return url, ""
+            return real_url, ""
         text = trafilatura.extract(html, include_comments=False, include_tables=False)
-        return url, (text or "").strip()
+        return real_url, (text or "").strip()
     except Exception:
         return url, ""
 
@@ -244,7 +282,7 @@ def run_scraper(save_path="scraped_testimonies.json"):
     completed = 0
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         future_to_meta = {
-            pool.submit(search_google_news, q): (q, facility) for q, facility in queries
+            pool.submit(search_yahoo_news, q): (q, facility) for q, facility in queries
         }
         for fut in as_completed(future_to_meta):
             query, facility = future_to_meta[fut]
@@ -292,10 +330,18 @@ def run_scraper(save_path="scraped_testimonies.json"):
             "publisher": meta["publisher"] or "Unknown",
             "search_keywords": meta["search_keywords"],
             "facility_hints": meta["facility_hints"],
-            "search_source": "google_news_rss",
+            "search_source": "yahoo_news",
             "retrieved_at": datetime.now(timezone.utc).isoformat(),
             "sections": sections,
         })
+
+    global _yahoo_driver
+    if _yahoo_driver:
+        try:
+            _yahoo_driver.quit()
+        except Exception:
+            pass
+        _yahoo_driver = None
 
     _atomic_write_json(save_path, output)
     total_sections = sum(len(a["sections"]) for a in output)
